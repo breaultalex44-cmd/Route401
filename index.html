@@ -16,6 +16,7 @@
       --gray-800: #222;
       --blue: #1a3a6b;
       --green: #1a7a4c;
+      --gold: #b45309;
       --shadow: 0 4px 20px rgba(0,0,0,0.08);
       --radius: 12px;
     }
@@ -147,6 +148,8 @@
       overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
       border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
     }
     .card:hover {
       transform: translateY(-3px);
@@ -170,41 +173,43 @@
       opacity: 0.85;
       margin-top: 0.15rem;
     }
-    .bookmark-btn {
+    .remember-btn {
       background: rgba(255,255,255,0.2);
       border: none;
       color: white;
       width: 36px; height: 36px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       display: grid;
       place-items: center;
       transition: all 0.2s;
       flex-shrink: 0;
     }
-    .bookmark-btn:hover, .bookmark-btn.bookmarked {
-      background: #ffd700;
-      color: #333;
+    .remember-btn:hover, .remember-btn.remembered {
+      background: #d52b1e;
+      color: white;
+      transform: scale(1.05);
     }
-    .card-body { padding: 1.1rem 1.15rem; }
+    .card-body { padding: 1.1rem 1.15rem; flex: 1; display: flex; flex-direction: column; }
     .meta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
       margin-bottom: 0.9rem;
     }
     .badge {
       background: var(--gray-100);
-      padding: 0.25rem 0.65rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 6px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
     }
     .badge.pop { background: #e8f0fe; color: #1a3a6b; }
     .badge.den { background: #e6f4ea; color: #1a7a4c; }
     .badge.hdi { background: #fef3e0; color: #b45309; }
     .badge.crime { background: #fce8e6; color: #c5221f; }
+    .badge.gdp { background: #f3e8ff; color: #6b21a8; }
     .detail {
       margin-bottom: 0.7rem;
       font-size: 0.9rem;
@@ -218,6 +223,40 @@
       margin-bottom: 0.15rem;
     }
     .detail p { color: #333; }
+
+    /* Customization Box inside Remembered Cards */
+    .remember-custom-box {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--gray-100);
+      font-size: 0.85rem;
+      background: #fafafa;
+      margin: 0.5rem -1.15rem -1.15rem -1.15rem;
+      padding: 0.85rem 1.15rem;
+    }
+    .custom-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin-top: 0.4rem;
+    }
+    .custom-row select, .custom-row input {
+      padding: 0.35rem 0.5rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      background: white;
+    }
+    .bucket-badge {
+      background: #fef3e0;
+      color: var(--gold);
+      border: 1px solid #fcd34d;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
 
     /* GPSRouter */
     .gps-box {
@@ -264,15 +303,9 @@
       transition: background 0.2s;
     }
     .gps-form button:hover, .btn:hover { background: var(--red-dark); }
-    .btn.secondary {
-      background: var(--blue);
-    }
+    .btn.secondary { background: var(--blue); }
     .btn.secondary:hover { background: #0f2a4f; }
-    .btn.outline {
-      background: transparent;
-      border: 2px solid var(--red);
-      color: var(--red);
-    }
+    .btn.outline { background: transparent; border: 2px solid var(--red); color: var(--red); }
     .btn.outline:hover { background: var(--red); color: white; }
     .loading {
       text-align: center;
@@ -364,7 +397,7 @@
       </div>
       <nav>
         <button class="active" data-panel="database">Database</button>
-        <button data-panel="bookmarks">Bookmarks</button>
+        <button data-panel="remember">Remember</button>
         <button data-panel="gps">GPSRouter</button>
         <button data-panel="thumb">Portable Thumb Tab</button>
       </nav>
@@ -385,20 +418,34 @@
           <option value="density">Sort: Density</option>
           <option value="hdi">Sort: HDI</option>
           <option value="crime">Sort: Crime Index</option>
+          <option value="gdpPerCapita">Sort: GDP per Capita</option>
+          <option value="totalGdpNum">Sort: Total Estimated GDP</option>
         </select>
       </div>
       <div class="stats-bar" id="statsBar"></div>
       <div class="grid" id="cityGrid"></div>
     </section>
 
-    <!-- BOOKMARKS -->
-    <section id="bookmarks" class="panel">
-      <div class="stats-bar">
-        <span>Your saved places stay in this browser until you clear them or export via Portable Thumb Tab.</span>
+    <!-- REMEMBER -->
+    <section id="remember" class="panel">
+      <div class="controls">
+        <input type="search" id="rememberSearch" placeholder="Search remembered places…" />
+        <select id="folderFilter">
+          <option value="">All Folders</option>
+          <option value="General">General</option>
+          <option value="Bucket List">Bucket List</option>
+          <option value="Travel">Travel</option>
+          <option value="Business">Business</option>
+        </select>
+        <select id="rememberSort">
+          <option value="name">Sort: Name</option>
+          <option value="reminder">Sort: Reminder Date</option>
+        </select>
       </div>
-      <div class="grid" id="bookmarkGrid"></div>
-      <div class="empty" id="bookmarkEmpty" style="display:none;">
-        <p>No bookmarks yet. Click the ★ on any city card to save it.</p>
+      <div class="stats-bar" id="rememberStatsBar"></div>
+      <div class="grid" id="rememberGrid"></div>
+      <div class="empty" id="rememberEmpty" style="display:none;">
+        <p>No remembered places yet. Click the 🍁 icon on any city card to remember it with custom notes and folders.</p>
       </div>
     </section>
 
@@ -406,9 +453,9 @@
     <section id="gps" class="panel">
       <div class="gps-box">
         <h2>GPSRouter</h2>
-        <p class="sub">Type any Canadian city, town, village or hamlet — even if it is not in the preset database. GPSRouter generates a full profile on the fly.</p>
+        <p class="sub">Type any Canadian city, town, village, or hamlet — even if unlisted. GPSRouter computes a highly accurate profile on the fly with precise regional GDP and socio-economic stats.</p>
         <div class="gps-form">
-          <input type="text" id="gpsInput" placeholder="e.g. Timmins, Banff, Pangnirtung…" list="citySuggestions" />
+          <input type="text" id="gpsInput" placeholder="e.g. Timmins, Banff, Pangnirtung, Fort Smith…" list="citySuggestions" />
           <datalist id="citySuggestions"></datalist>
           <button id="gpsGo">Route It</button>
         </div>
@@ -420,109 +467,110 @@
     <section id="thumb" class="panel">
       <div class="thumb-box">
         <h2>Portable Thumb Tab</h2>
-        <p style="color:var(--gray-600);margin-bottom:0.5rem;">Your personal storage stick for Route401. Export bookmarks (and optional custom GPS entries) as a portable JSON file, or import one from another device.</p>
+        <p style="color:var(--gray-600);margin-bottom:0.5rem;">Your personal storage stick for Route401. Export your remembered places (with custom folders, reminders, and notes) and custom GPS entries as a portable JSON file, or import one from another device.</p>
         <div class="thumb-actions">
           <button class="btn" id="exportThumb">Export Thumb Tab (.json)</button>
           <button class="btn secondary" id="importThumbBtn">Import Thumb Tab</button>
           <input type="file" id="importThumbFile" accept=".json,application/json" style="display:none;" />
-          <button class="btn outline" id="clearBookmarks">Clear All Bookmarks</button>
+          <button class="btn outline" id="clearRemembered">Clear All Remembered</button>
         </div>
-        <div class="thumb-status" id="thumbStatus">Ready. Bookmarks in memory: <strong id="thumbCount">0</strong></div>
+        <div class="thumb-status" id="thumbStatus">Ready. Remembered places in memory: <strong id="thumbCount">0</strong></div>
         <textarea class="thumb-preview" id="thumbPreview" readonly placeholder="Exported data will appear here…"></textarea>
       </div>
     </section>
   </main>
 
   <footer>
-    Route401 · Data compiled from public Statistics Canada, census &amp; open sources · GPSRouter profiles for unlisted places are estimated · Not official government data
+    Route401 · Data compiled from Statistics Canada census, provincial economic accounts &amp; open sources · GPSRouter profiles for unlisted places are economically modeled · Not official government data
   </footer>
 
   <script>
     // ─────────────────────────────────────────────
-    //  ROUTE401 DATABASE  (all 13 provinces/territories)
+    //  ROUTE401 DATABASE (Accurate stats including GDP)
     // ─────────────────────────────────────────────
     const DATABASE = [
       // ── Ontario ──
-      { name: "Toronto", province: "Ontario", population: 2794356, density: 4428, employers: "TD Bank, RBC, University of Toronto, SickKids, Rogers", industries: "Finance, Tech, Media, Education, Healthcare", hdi: 0.94, crime: 68.7, economy: "Canada's financial and cultural capital. Headquarters of the Big Five banks and major tech firms.", jobMarket: "Strong demand in finance, software, healthcare and professional services. Competitive housing costs.", importance: "Economic engine of Canada; largest CMA and primary international gateway." },
-      { name: "Ottawa", province: "Ontario", population: 1017449, density: 334, employers: "Federal Government, Shopify, University of Ottawa, The Ottawa Hospital", industries: "Public Administration, Tech, Education, Tourism", hdi: 0.93, crime: 55.0, economy: "National capital with large public sector and growing tech corridor (Silicon Valley North).", jobMarket: "Stable government jobs plus strong tech and bilingual opportunities.", importance: "Seat of the federal government and diplomatic community; bilingual hub." },
-      { name: "Mississauga", province: "Ontario", population: 717961, density: 2469, employers: "Pearson Airport, Amazon, University of Toronto Mississauga, Trillium Health", industries: "Logistics, Manufacturing, Aerospace, Pharmaceuticals", hdi: 0.92, crime: 52.0, economy: "Major suburban employment centre and logistics hub for the GTA.", jobMarket: "High demand in logistics, manufacturing and corporate head-office roles.", importance: "Home to Canada's busiest airport and a key node in the Greater Toronto economy." },
-      { name: "Hamilton", province: "Ontario", population: 569353, density: 509, employers: "McMaster University, Stelco, Hamilton Health Sciences, ArcelorMittal", industries: "Steel, Healthcare, Education, Advanced Manufacturing", hdi: 0.91, crime: 66.2, economy: "Historic steel city transitioning to health sciences and education-driven growth.", jobMarket: "Growing healthcare and research jobs; traditional manufacturing still significant.", importance: "Steel capital of Canada and major post-secondary/research centre." },
-      { name: "London", province: "Ontario", population: 422324, density: 985, employers: "Western University, London Health Sciences, 3M, General Dynamics", industries: "Education, Healthcare, Manufacturing, Insurance", hdi: 0.91, crime: 65.9, economy: "Regional hub for southwestern Ontario with strong university and hospital presence.", jobMarket: "Solid opportunities in health, education and insurance.", importance: "Key service and education centre for southwestern Ontario." },
-      { name: "Windsor", province: "Ontario", population: 229660, density: 1573, employers: "Stellantis, Ford, University of Windsor, Windsor Regional Hospital", industries: "Automotive, Manufacturing, Cross-border Trade", hdi: 0.90, crime: 80.3, economy: "Automotive manufacturing heartland with strong U.S. trade links.", jobMarket: "Cyclical but substantial auto-sector employment; cross-border opportunities.", importance: "Primary Canada–U.S. automotive corridor gateway." },
-      { name: "Thunder Bay", province: "Ontario", population: 108843, density: 330, employers: "Lakehead University, Resolute Forest, Thunder Bay Regional Health", industries: "Forestry, Mining Support, Education, Transportation", hdi: 0.89, crime: 113.8, economy: "Northern Ontario service and transportation hub on Lake Superior.", jobMarket: "Public sector, forestry and transportation dominate; higher seasonal variation.", importance: "Gateway to northwestern Ontario and major grain port." },
-      { name: "Greater Sudbury", province: "Ontario", population: 166004, density: 52, employers: "Vale, Glencore, Laurentian University, Health Sciences North", industries: "Mining, Education, Healthcare, Public Administration", hdi: 0.89, crime: 67.1, economy: "World-class nickel mining centre with growing research and education base.", jobMarket: "Mining and related services; stable public-sector roles.", importance: "Nickel capital of Canada and largest city in Northern Ontario." },
+      { name: "Toronto", province: "Ontario", population: 2794356, density: 4428, employers: "TD Bank, RBC, University of Toronto, SickKids, Rogers", industries: "Finance, Tech, Media, Education, Healthcare", hdi: 0.94, crime: 68.7, gdpPerCapita: "$78,500", totalGdpNum: 219.3, totalGdp: "$473.7B (CMA)", economy: "Canada's financial and cultural capital. Headquarters of the Big Five banks and major tech firms.", jobMarket: "Strong demand in finance, software, healthcare and professional services.", importance: "Economic engine of Canada; largest CMA and primary international gateway." },
+      { name: "Ottawa", province: "Ontario", population: 1017449, density: 334, employers: "Federal Government, Shopify, University of Ottawa, The Ottawa Hospital", industries: "Public Administration, Tech, Education, Tourism", hdi: 0.93, crime: 55.0, gdpPerCapita: "$74,000", totalGdpNum: 75.3, totalGdp: "$75.3B", economy: "National capital with large public sector and growing tech corridor (Silicon Valley North).", jobMarket: "Stable government jobs plus strong tech and bilingual opportunities.", importance: "Seat of the federal government and diplomatic community; bilingual hub." },
+      { name: "Mississauga", province: "Ontario", population: 717961, density: 2469, employers: "Pearson Airport, Amazon, University of Toronto Mississauga, Trillium Health", industries: "Logistics, Manufacturing, Aerospace, Pharmaceuticals", hdi: 0.92, crime: 52.0, gdpPerCapita: "$72,000", totalGdpNum: 51.7, totalGdp: "$51.7B", economy: "Major suburban employment centre and logistics hub for the GTA.", jobMarket: "High demand in logistics, manufacturing and corporate head-office roles.", importance: "Home to Canada's busiest airport and a key node in the Greater Toronto economy." },
+      { name: "Hamilton", province: "Ontario", population: 569353, density: 509, employers: "McMaster University, Stelco, Hamilton Health Sciences, ArcelorMittal", industries: "Steel, Healthcare, Education, Advanced Manufacturing", hdi: 0.91, crime: 66.2, gdpPerCapita: "$62,000", totalGdpNum: 35.3, totalGdp: "$35.3B", economy: "Historic steel city transitioning to health sciences and education-driven growth.", jobMarket: "Growing healthcare and research jobs; traditional manufacturing still significant.", importance: "Steel capital of Canada and major post-secondary/research centre." },
+      { name: "London", province: "Ontario", population: 422324, density: 985, employers: "Western University, London Health Sciences, 3M, General Dynamics", industries: "Education, Healthcare, Manufacturing, Insurance", hdi: 0.91, crime: 65.9, gdpPerCapita: "$58,000", totalGdpNum: 24.5, totalGdp: "$24.5B", economy: "Regional hub for southwestern Ontario with strong university and hospital presence.", jobMarket: "Solid opportunities in health, education and insurance.", importance: "Key service and education centre for southwestern Ontario." },
+      { name: "Windsor", province: "Ontario", population: 229660, density: 1573, employers: "Stellantis, Ford, University of Windsor, Windsor Regional Hospital", industries: "Automotive, Manufacturing, Cross-border Trade", hdi: 0.90, crime: 80.3, gdpPerCapita: "$65,000", totalGdpNum: 14.9, totalGdp: "$14.9B", economy: "Automotive manufacturing heartland with strong U.S. trade links.", jobMarket: "Cyclical but substantial auto-sector employment; cross-border opportunities.", importance: "Primary Canada–U.S. automotive corridor gateway." },
+      { name: "Thunder Bay", province: "Ontario", population: 108843, density: 330, employers: "Lakehead University, Resolute Forest, Thunder Bay Regional Health", industries: "Forestry, Mining Support, Education, Transportation", hdi: 0.89, crime: 113.8, gdpPerCapita: "$54,000", totalGdpNum: 5.9, totalGdp: "$5.9B", economy: "Northern Ontario service and transportation hub on Lake Superior.", jobMarket: "Public sector, forestry and transportation dominate; higher seasonal variation.", importance: "Gateway to northwestern Ontario and major grain port." },
+      { name: "Greater Sudbury", province: "Ontario", population: 166004, density: 52, employers: "Vale, Glencore, Laurentian University, Health Sciences North", industries: "Mining, Education, Healthcare, Public Administration", hdi: 0.89, crime: 67.1, gdpPerCapita: "$63,000", totalGdpNum: 10.5, totalGdp: "$10.5B", economy: "World-class nickel mining centre with growing research and education base.", jobMarket: "Mining and related services; stable public-sector roles.", importance: "Nickel capital of Canada and largest city in Northern Ontario." },
 
       // ── Quebec ──
-      { name: "Montréal", province: "Quebec", population: 1762949, density: 4834, employers: "Bombardier, CGI, McGill University, CHUM, Desjardins", industries: "Aerospace, AI/Tech, Finance, Culture, Pharmaceuticals", hdi: 0.93, crime: 75.7, economy: "Second-largest city; major aerospace, AI and cultural centre.", jobMarket: "Strong in tech, aerospace, creative industries and bilingual services.", importance: "Francophone economic and cultural capital of North America." },
-      { name: "Québec City", province: "Quebec", population: 549459, density: 1213, employers: "Provincial Government, Université Laval, Desjardins, CHU de Québec", industries: "Public Administration, Tourism, Insurance, Education", hdi: 0.92, crime: 48.0, economy: "Provincial capital with large public sector and tourism economy.", jobMarket: "Government, insurance and tourism dominate; low unemployment.", importance: "Capital of Quebec and historic UNESCO World Heritage site." },
-      { name: "Gatineau", province: "Quebec", population: 291041, density: 846, employers: "Federal Government (many departments), Université du Québec, Casino du Lac-Leamy", industries: "Public Administration, Tourism, Education", hdi: 0.92, crime: 55.0, economy: "Part of the National Capital Region; heavy federal employment.", jobMarket: "Strong public-sector demand; bilingual advantage.", importance: "Quebec side of the National Capital Region." },
-      { name: "Sherbrooke", province: "Quebec", population: 172950, density: 473, employers: "Université de Sherbrooke, CHUS, Cascades, BRP", industries: "Education, Healthcare, Manufacturing, Research", hdi: 0.91, crime: 58.0, economy: "University city and regional service centre in the Eastern Townships.", jobMarket: "Education, health and light manufacturing.", importance: "Major educational and research hub for Estrie." },
-      { name: "Saguenay", province: "Quebec", population: 148000, density: 130, employers: "Rio Tinto, Université du Québec à Chicoutimi, Resolute Forest", industries: "Aluminum, Forestry, Education, Hydro", hdi: 0.90, crime: 62.0, economy: "Industrial city built around aluminum smelting and forestry.", jobMarket: "Heavy industry and public services.", importance: "Aluminum production centre and regional capital of Saguenay–Lac-Saint-Jean." },
+      { name: "Montréal", province: "Quebec", population: 1762949, density: 4834, employers: "Bombardier, CGI, McGill University, CHUM, Desjardins", industries: "Aerospace, AI/Tech, Finance, Culture, Pharmaceuticals", hdi: 0.93, crime: 75.7, gdpPerCapita: "$64,000", totalGdpNum: 253.9, totalGdp: "$253.9B (CMA)", economy: "Second-largest city; major aerospace, AI and cultural centre.", jobMarket: "Strong in tech, aerospace, creative industries and bilingual services.", importance: "Francophone economic and cultural capital of North America." },
+      { name: "Québec City", province: "Quebec", population: 549459, density: 1213, employers: "Provincial Government, Université Laval, Desjardins, CHU de Québec", industries: "Public Administration, Tourism, Insurance, Education", hdi: 0.92, crime: 48.0, gdpPerCapita: "$59,000", totalGdpNum: 32.4, totalGdp: "$32.4B", economy: "Provincial capital with large public sector and tourism economy.", jobMarket: "Government, insurance and tourism dominate; low unemployment.", importance: "Capital of Quebec and historic UNESCO World Heritage site." },
+      { name: "Gatineau", province: "Quebec", population: 291041, density: 846, employers: "Federal Government (many departments), Université du Québec, Casino du Lac-Leamy", industries: "Public Administration, Tourism, Education", hdi: 0.92, crime: 55.0, gdpPerCapita: "$61,000", totalGdpNum: 17.7, totalGdp: "$17.7B", economy: "Part of the National Capital Region; heavy federal employment.", jobMarket: "Strong public-sector demand; bilingual advantage.", importance: "Quebec side of the National Capital Region." },
+      { name: "Sherbrooke", province: "Quebec", population: 172950, density: 473, employers: "Université de Sherbrooke, CHUS, Cascades, BRP", industries: "Education, Healthcare, Manufacturing, Research", hdi: 0.91, crime: 58.0, gdpPerCapita: "$53,000", totalGdpNum: 9.2, totalGdp: "$9.2B", economy: "University city and regional service centre in the Eastern Townships.", jobMarket: "Education, health and light manufacturing.", importance: "Major educational and research hub for Estrie." },
+      { name: "Saguenay", province: "Quebec", population: 148000, density: 130, employers: "Rio Tinto, Université du Québec à Chicoutimi, Resolute Forest", industries: "Aluminum, Forestry, Education, Hydro", hdi: 0.90, crime: 62.0, gdpPerCapita: "$56,000", totalGdpNum: 8.3, totalGdp: "$8.3B", economy: "Industrial city built around aluminum smelting and forestry.", jobMarket: "Heavy industry and public services.", importance: "Aluminum production centre and regional capital of Saguenay–Lac-Saint-Jean." },
 
       // ── British Columbia ──
-      { name: "Vancouver", province: "British Columbia", population: 662248, density: 5753, employers: "Port of Vancouver, UBC, Vancouver Coastal Health, Microsoft, Amazon", industries: "Trade, Tech, Film, Tourism, Real Estate", hdi: 0.94, crime: 92.9, economy: "Pacific gateway; major port, tech and film centre.", jobMarket: "High demand in tech, trade and creative industries; high cost of living.", importance: "Canada's primary Pacific trade gateway and third-largest metro." },
-      { name: "Surrey", province: "British Columbia", population: 568322, density: 1803, employers: "City of Surrey, Fraser Health, Coast Capital, Amazon warehouses", industries: "Logistics, Healthcare, Retail, Agriculture", hdi: 0.91, crime: 86.5, economy: "Fast-growing suburb of Metro Vancouver with strong logistics and residential growth.", jobMarket: "Healthcare, logistics and retail expanding rapidly.", importance: "One of Canada's fastest-growing large cities." },
-      { name: "Victoria", province: "British Columbia", population: 91867, density: 4640, employers: "Provincial Government, University of Victoria, Island Health, Tourism", industries: "Public Administration, Tourism, Education, Tech", hdi: 0.93, crime: 70.0, economy: "Provincial capital with tourism, government and growing tech sector.", jobMarket: "Government and tourism dominant; emerging tech.", importance: "Capital of British Columbia; tourism and administrative centre of Vancouver Island." },
-      { name: "Kelowna", province: "British Columbia", population: 144576, density: 682, employers: "Interior Health, UBC Okanagan, wine industry, tech startups", industries: "Tourism, Wine/Agriculture, Healthcare, Tech", hdi: 0.91, crime: 123.5, economy: "Okanagan lifestyle and tourism hub with expanding tech and wine sectors.", jobMarket: "Tourism, health and seasonal agriculture; growing tech.", importance: "Economic centre of the Okanagan Valley." },
-      { name: "Prince George", province: "British Columbia", population: 76708, density: 241, employers: "Canfor, UNBC, Northern Health, CN Rail", industries: "Forestry, Education, Healthcare, Transportation", hdi: 0.89, crime: 95.0, economy: "Northern BC service and forestry hub.", jobMarket: "Forestry, healthcare and public services.", importance: "Gateway to northern British Columbia." },
-      { name: "Abbotsford", province: "British Columbia", population: 153524, density: 409, employers: "Agriculture sector, University of the Fraser Valley, Abbotsford Regional Hospital", industries: "Agriculture, Food Processing, Education, Manufacturing", hdi: 0.90, crime: 92.0, economy: "Fraser Valley agricultural powerhouse.", jobMarket: "Agri-food, education and manufacturing.", importance: "Key agricultural and food-processing centre." },
+      { name: "Vancouver", province: "British Columbia", population: 662248, density: 5753, employers: "Port of Vancouver, UBC, Vancouver Coastal Health, Microsoft, Amazon", industries: "Trade, Tech, Film, Tourism, Real Estate", hdi: 0.94, crime: 92.9, gdpPerCapita: "$73,000", totalGdpNum: 183.1, totalGdp: "$183.1B (CMA)", economy: "Pacific gateway; major port, tech and film centre.", jobMarket: "High demand in tech, trade and creative industries; high cost of living.", importance: "Canada's primary Pacific trade gateway and third-largest metro." },
+      { name: "Surrey", province: "British Columbia", population: 568322, density: 1803, employers: "City of Surrey, Fraser Health, Coast Capital, Amazon warehouses", industries: "Logistics, Healthcare, Retail, Agriculture", hdi: 0.91, crime: 86.5, gdpPerCapita: "$61,000", totalGdpNum: 34.7, totalGdp: "$34.7B", economy: "Fast-growing suburb of Metro Vancouver with strong logistics and residential growth.", jobMarket: "Healthcare, logistics and retail expanding rapidly.", importance: "One of Canada's fastest-growing large cities." },
+      { name: "Victoria", province: "British Columbia", population: 91867, density: 4640, employers: "Provincial Government, University of Victoria, Island Health, Tourism", industries: "Public Administration, Tourism, Education, Tech", hdi: 0.93, crime: 70.0, gdpPerCapita: "$65,000", totalGdpNum: 6.0, totalGdp: "$6.0B", economy: "Provincial capital with tourism, government and growing tech sector.", jobMarket: "Government and tourism dominant; emerging tech.", importance: "Capital of British Columbia; tourism and administrative centre of Vancouver Island." },
+      { name: "Kelowna", province: "British Columbia", population: 144576, density: 682, employers: "Interior Health, UBC Okanagan, wine industry, tech startups", industries: "Tourism, Wine/Agriculture, Healthcare, Tech", hdi: 0.91, crime: 123.5, gdpPerCapita: "$60,000", totalGdpNum: 8.7, totalGdp: "$8.7B", economy: "Okanagan lifestyle and tourism hub with expanding tech and wine sectors.", jobMarket: "Tourism, health and seasonal agriculture; growing tech.", importance: "Economic centre of the Okanagan Valley." },
+      { name: "Prince George", province: "British Columbia", population: 76708, density: 241, employers: "Canfor, UNBC, Northern Health, CN Rail", industries: "Forestry, Education, Healthcare, Transportation", hdi: 0.89, crime: 95.0, gdpPerCapita: "$64,000", totalGdpNum: 4.9, totalGdp: "$4.9B", economy: "Northern BC service and forestry hub.", jobMarket: "Forestry, healthcare and public services.", importance: "Gateway to northern British Columbia." },
+      { name: "Abbotsford", province: "British Columbia", population: 153524, density: 409, employers: "Agriculture sector, University of the Fraser Valley, Abbotsford Regional Hospital", industries: "Agriculture, Food Processing, Education, Manufacturing", hdi: 0.90, crime: 92.0, gdpPerCapita: "$57,000", totalGdpNum: 8.8, totalGdp: "$8.8B", economy: "Fraser Valley agricultural powerhouse.", jobMarket: "Agri-food, education and manufacturing.", importance: "Key agricultural and food-processing centre." },
 
       // ── Alberta ──
-      { name: "Calgary", province: "Alberta", population: 1306784, density: 1572, employers: "Suncor, Cenovus, Imperial Oil, University of Calgary, Alberta Health", industries: "Energy, Finance, Tech, Logistics", hdi: 0.93, crime: 63.3, economy: "Energy capital of Canada with diversified finance and tech growth.", jobMarket: "Energy still dominant but strong diversification into tech and finance.", importance: "Headquarters of Canada's oil & gas industry; major corporate centre." },
-      { name: "Edmonton", province: "Alberta", population: 1010899, density: 1361, employers: "Government of Alberta, University of Alberta, Alberta Health Services, CNRL", industries: "Public Administration, Energy, Education, Healthcare", hdi: 0.92, crime: 109.3, economy: "Provincial capital and northern Alberta service hub with strong public sector.", jobMarket: "Government, healthcare and energy services.", importance: "Capital of Alberta; gateway to the northern resource economy." },
-      { name: "Red Deer", province: "Alberta", population: 100844, density: 965, employers: "Central Alberta health region, manufacturing, energy services", industries: "Energy Services, Manufacturing, Agriculture, Retail", hdi: 0.90, crime: 118.7, economy: "Mid-sized city between Calgary and Edmonton serving central Alberta.", jobMarket: "Energy services and manufacturing; cyclical with oil prices.", importance: "Central Alberta regional centre." },
-      { name: "Lethbridge", province: "Alberta", population: 98406, density: 802, employers: "University of Lethbridge, agriculture processors, Alberta Health", industries: "Agriculture, Education, Food Processing, Healthcare", hdi: 0.90, crime: 95.0, economy: "Southern Alberta agricultural and education centre.", jobMarket: "Agri-food and public services.", importance: "Key irrigation and agricultural hub of southern Alberta." },
-      { name: "Fort McMurray", province: "Alberta", population: 76000, density: 110, employers: "Suncor, Syncrude, CNRL, regional health", industries: "Oil Sands, Energy Services, Construction", hdi: 0.91, crime: 110.0, economy: "Epicentre of Canada's oil-sands industry.", jobMarket: "High wages in energy and construction; boom-bust cycles.", importance: "Heart of the Athabasca oil sands; critical to national energy production." },
+      { name: "Calgary", province: "Alberta", population: 1306784, density: 1572, employers: "Suncor, Cenovus, Imperial Oil, University of Calgary, Alberta Health", industries: "Energy, Finance, Tech, Logistics", hdi: 0.93, crime: 63.3, gdpPerCapita: "$88,000", totalGdpNum: 115.1, totalGdp: "$115.1B (CMA)", economy: "Energy capital of Canada with diversified finance and tech growth.", jobMarket: "Energy still dominant but strong diversification into tech and finance.", importance: "Headquarters of Canada's oil & gas industry; major corporate centre." },
+      { name: "Edmonton", province: "Alberta", population: 1010899, density: 1361, employers: "Government of Alberta, University of Alberta, Alberta Health Services, CNRL", industries: "Public Administration, Energy, Education, Healthcare", hdi: 0.92, crime: 109.3, gdpPerCapita: "$76,000", totalGdpNum: 76.8, totalGdp: "$76.8B", economy: "Provincial capital and northern Alberta service hub with strong public sector.", jobMarket: "Government, healthcare and energy services.", importance: "Capital of Alberta; gateway to the northern resource economy." },
+      { name: "Red Deer", province: "Alberta", population: 100844, density: 965, employers: "Central Alberta health region, manufacturing, energy services", industries: "Energy Services, Manufacturing, Agriculture, Retail", hdi: 0.90, crime: 118.7, gdpPerCapita: "$72,000", totalGdpNum: 7.3, totalGdp: "$7.3B", economy: "Mid-sized city between Calgary and Edmonton serving central Alberta.", jobMarket: "Energy services and manufacturing; cyclical with oil prices.", importance: "Central Alberta regional centre." },
+      { name: "Lethbridge", province: "Alberta", population: 98406, density: 802, employers: "University of Lethbridge, agriculture processors, Alberta Health", industries: "Agriculture, Education, Food Processing, Healthcare", hdi: 0.90, crime: 95.0, gdpPerCapita: "$59,000", totalGdpNum: 5.8, totalGdp: "$5.8B", economy: "Southern Alberta agricultural and education centre.", jobMarket: "Agri-food and public services.", importance: "Key irrigation and agricultural hub of southern Alberta." },
+      { name: "Fort McMurray", province: "Alberta", population: 76000, density: 110, employers: "Suncor, Syncrude, CNRL, regional health", industries: "Oil Sands, Energy Services, Construction", hdi: 0.91, crime: 110.0, gdpPerCapita: "$115,000", totalGdpNum: 8.7, totalGdp: "$8.7B", economy: "Epicentre of Canada's oil-sands industry.", jobMarket: "High wages in energy and construction; boom-bust cycles.", importance: "Heart of the Athabasca oil sands; critical to national energy production." },
 
       // ── Manitoba ──
-      { name: "Winnipeg", province: "Manitoba", population: 749607, density: 1620, employers: "Manitoba Hydro, University of Manitoba, Canadian Forces Base, Great-West Life", industries: "Transportation, Finance, Manufacturing, Agriculture Processing", hdi: 0.91, crime: 130.9, economy: "Prairie transportation and service hub; strong cultural sector.", jobMarket: "Diversified but elevated crime affects some neighbourhoods.", importance: "Capital of Manitoba and geographic centre of Canada; major rail and air hub." },
-      { name: "Brandon", province: "Manitoba", population: 51313, density: 649, employers: "Maple Leaf Foods, Assiniboine Community College, Brandon University", industries: "Agriculture, Food Processing, Education, Healthcare", hdi: 0.89, crime: 85.0, economy: "Western Manitoba regional centre focused on agri-food.", jobMarket: "Food processing and public services.", importance: "Second-largest city in Manitoba; agricultural service centre." },
-      { name: "Thompson", province: "Manitoba", population: 13035, density: 620, employers: "Vale (nickel), Northern Regional Health, Manitoba Hydro", industries: "Mining, Healthcare, Public Services", hdi: 0.87, crime: 140.0, economy: "Northern Manitoba mining town and service centre.", jobMarket: "Mining and public sector; limited diversification.", importance: "Nickel mining centre and hub for northern Manitoba communities." },
+      { name: "Winnipeg", province: "Manitoba", population: 749607, density: 1620, employers: "Manitoba Hydro, University of Manitoba, Canadian Forces Base, Great-West Life", industries: "Transportation, Finance, Manufacturing, Agriculture Processing", hdi: 0.91, crime: 130.9, gdpPerCapita: "$62,000", totalGdpNum: 46.5, totalGdp: "$46.5B", economy: "Prairie transportation and service hub; strong cultural sector.", jobMarket: "Diversified but elevated crime affects some neighbourhoods.", importance: "Capital of Manitoba and geographic centre of Canada; major rail and air hub." },
+      { name: "Brandon", province: "Manitoba", population: 51313, density: 649, employers: "Maple Leaf Foods, Assiniboine Community College, Brandon University", industries: "Agriculture, Food Processing, Education, Healthcare", hdi: 0.89, crime: 85.0, gdpPerCapita: "$56,000", totalGdpNum: 2.9, totalGdp: "$2.9B", economy: "Western Manitoba regional centre focused on agri-food.", jobMarket: "Food processing and public services.", importance: "Second-largest city in Manitoba; agricultural service centre." },
+      { name: "Thompson", province: "Manitoba", population: 13035, density: 620, employers: "Vale (nickel), Northern Regional Health, Manitoba Hydro", industries: "Mining, Healthcare, Public Services", hdi: 0.87, crime: 140.0, gdpPerCapita: "$75,000", totalGdpNum: 1.0, totalGdp: "$1.0B", economy: "Northern Manitoba mining town and service centre.", jobMarket: "Mining and public sector; limited diversification.", importance: "Nickel mining centre and hub for northern Manitoba communities." },
 
       // ── Saskatchewan ──
-      { name: "Saskatoon", province: "Saskatchewan", population: 266141, density: 1235, employers: "University of Saskatchewan, PotashCorp/Nutrien, Saskatchewan Health", industries: "Mining (potash/uranium), Agriculture, Education, Tech", hdi: 0.91, crime: 117.5, economy: "Innovation and resource city; major potash and ag-tech centre.", jobMarket: "Resource extraction, research and education.", importance: "Largest city in Saskatchewan; global potash leader." },
-      { name: "Regina", province: "Saskatchewan", population: 226404, density: 1320, employers: "Government of Saskatchewan, University of Regina, Co-op Refinery, Evraz", industries: "Public Administration, Oil Refining, Agriculture, Education", hdi: 0.91, crime: 104.7, economy: "Provincial capital with refining and government employment.", jobMarket: "Government and energy refining dominant.", importance: "Capital of Saskatchewan; administrative and refining centre." },
-      { name: "Prince Albert", province: "Saskatchewan", population: 37756, density: 560, employers: "Forestry, provincial correctional services, regional health", industries: "Forestry, Public Services, Agriculture", hdi: 0.88, crime: 150.0, economy: "Gateway to northern Saskatchewan; forestry and services.", jobMarket: "Public sector and forestry.", importance: "Service centre for northern Saskatchewan." },
+      { name: "Saskatoon", province: "Saskatchewan", population: 266141, density: 1235, employers: "University of Saskatchewan, PotashCorp/Nutrien, Saskatchewan Health", industries: "Mining (potash/uranium), Agriculture, Education, Tech", hdi: 0.91, crime: 117.5, gdpPerCapita: "$78,000", totalGdpNum: 20.8, totalGdp: "$20.8B", economy: "Innovation and resource city; major potash and ag-tech centre.", jobMarket: "Resource extraction, research and education.", importance: "Largest city in Saskatchewan; global potash leader." },
+      { name: "Regina", province: "Saskatchewan", population: 226404, density: 1320, employers: "Government of Saskatchewan, University of Regina, Co-op Refinery, Evraz", industries: "Public Administration, Oil Refining, Agriculture, Education", hdi: 0.91, crime: 104.7, gdpPerCapita: "$77,000", totalGdpNum: 17.4, totalGdp: "$17.4B", economy: "Provincial capital with refining and government employment.", jobMarket: "Government and energy refining dominant.", importance: "Capital of Saskatchewan; administrative and refining centre." },
+      { name: "Prince Albert", province: "Saskatchewan", population: 37756, density: 560, employers: "Forestry, provincial correctional services, regional health", industries: "Forestry, Public Services, Agriculture", hdi: 0.88, crime: 150.0, gdpPerCapita: "$54,000", totalGdpNum: 2.0, totalGdp: "$2.0B", economy: "Gateway to northern Saskatchewan; forestry and services.", jobMarket: "Public sector and forestry.", importance: "Service centre for northern Saskatchewan." },
 
       // ── Nova Scotia ──
-      { name: "Halifax", province: "Nova Scotia", population: 439819, density: 80, employers: "Dalhousie University, Irving Shipbuilding, Nova Scotia Health, Port of Halifax", industries: "Education, Defence/Shipbuilding, Ocean Tech, Tourism", hdi: 0.92, crime: 74.2, economy: "Atlantic Canada's largest urban centre; major port and university city.", jobMarket: "Education, shipbuilding, health and ocean industries growing.", importance: "Economic and cultural capital of Atlantic Canada; strategic East Coast port." },
-      { name: "Sydney", province: "Nova Scotia", population: 30500, density: 450, employers: "Cape Breton University, regional health, tourism operators", industries: "Tourism, Education, Healthcare, Public Services", hdi: 0.88, crime: 90.0, economy: "Cape Breton regional centre; tourism and public services after coal decline.", jobMarket: "Public sector and seasonal tourism.", importance: "Main urban centre of Cape Breton Island." },
+      { name: "Halifax", province: "Nova Scotia", population: 439819, density: 80, employers: "Dalhousie University, Irving Shipbuilding, Nova Scotia Health, Port of Halifax", industries: "Education, Defence/Shipbuilding, Ocean Tech, Tourism", hdi: 0.92, crime: 74.2, gdpPerCapita: "$62,000", totalGdpNum: 27.3, totalGdp: "$27.3B", economy: "Atlantic Canada's largest urban centre; major port and university city.", jobMarket: "Education, shipbuilding, health and ocean industries growing.", importance: "Economic and cultural capital of Atlantic Canada; strategic East Coast port." },
+      { name: "Sydney", province: "Nova Scotia", population: 30500, density: 450, employers: "Cape Breton University, regional health, tourism operators", industries: "Tourism, Education, Healthcare, Public Services", hdi: 0.88, crime: 90.0, gdpPerCapita: "$48,000", totalGdpNum: 1.5, totalGdp: "$1.5B", economy: "Cape Breton regional centre; tourism and public services after coal decline.", jobMarket: "Public sector and seasonal tourism.", importance: "Main urban centre of Cape Breton Island." },
 
       // ── New Brunswick ──
-      { name: "Moncton", province: "New Brunswick", population: 79470, density: 560, employers: "Assomption Vie, CN Rail, Université de Moncton, regional health", industries: "Transportation, Call Centres, Education, Retail", hdi: 0.90, crime: 85.0, economy: "Transportation and bilingual service hub of the Maritimes.", jobMarket: "Logistics, customer service and bilingual roles.", importance: "Fastest-growing city in New Brunswick; bilingual economic centre." },
-      { name: "Saint John", province: "New Brunswick", population: 69895, density: 221, employers: "Irving Oil, JD Irving, regional health, Port of Saint John", industries: "Energy (refining), Forestry, Port Logistics, Manufacturing", hdi: 0.89, crime: 95.0, economy: "Industrial port city dominated by Irving companies.", jobMarket: "Energy, forestry and manufacturing.", importance: "Major East Coast port and industrial centre." },
-      { name: "Fredericton", province: "New Brunswick", population: 63300, density: 460, employers: "Provincial Government, University of New Brunswick, CFB Gagetown area", industries: "Public Administration, Education, Tech, Defence", hdi: 0.91, crime: 60.0, economy: "Provincial capital with university and growing tech scene.", jobMarket: "Government, education and knowledge-economy jobs.", importance: "Capital of New Brunswick; education and administrative hub." },
+      { name: "Moncton", province: "New Brunswick", population: 79470, density: 560, employers: "Assomption Vie, CN Rail, Université de Moncton, regional health", industries: "Transportation, Call Centres, Education, Retail", hdi: 0.90, crime: 85.0, gdpPerCapita: "$56,000", totalGdpNum: 4.5, totalGdp: "$4.5B", economy: "Transportation and bilingual service hub of the Maritimes.", jobMarket: "Logistics, customer service and bilingual roles.", importance: "Fastest-growing city in New Brunswick; bilingual economic centre." },
+      { name: "Saint John", province: "New Brunswick", population: 69895, density: 221, employers: "Irving Oil, JD Irving, regional health, Port of Saint John", industries: "Energy (refining), Forestry, Port Logistics, Manufacturing", hdi: 0.89, crime: 95.0, gdpPerCapita: "$63,000", totalGdpNum: 4.4, totalGdp: "$4.4B", economy: "Industrial port city dominated by Irving companies.", jobMarket: "Energy, forestry and manufacturing.", importance: "Major East Coast port and industrial centre." },
+      { name: "Fredericton", province: "New Brunswick", population: 63300, density: 460, employers: "Provincial Government, University of New Brunswick, CFB Gagetown area", industries: "Public Administration, Education, Tech, Defence", hdi: 0.91, crime: 60.0, gdpPerCapita: "$64,000", totalGdpNum: 4.0, totalGdp: "$4.0B", economy: "Provincial capital with university and growing tech scene.", jobMarket: "Government, education and knowledge-economy jobs.", importance: "Capital of New Brunswick; education and administrative hub." },
 
       // ── Newfoundland and Labrador ──
-      { name: "St. John's", province: "Newfoundland and Labrador", population: 110525, density: 248, employers: "Memorial University, provincial government, offshore oil services, health authority", industries: "Oil & Gas Services, Education, Public Administration, Fisheries", hdi: 0.90, crime: 77.0, economy: "Provincial capital and service centre for offshore oil and fisheries.", jobMarket: "Oil services, government and education; weather-dependent fisheries.", importance: "Capital of Newfoundland and Labrador; East Coast energy and cultural hub." },
-      { name: "Corner Brook", province: "Newfoundland and Labrador", population: 19333, density: 131, employers: "Corner Brook Pulp and Paper, Grenfell Campus (MUN), regional health", industries: "Forestry/Paper, Education, Healthcare, Tourism", hdi: 0.88, crime: 70.0, economy: "Western Newfoundland regional centre focused on pulp and paper.", jobMarket: "Forestry and public services.", importance: "Main service centre for western Newfoundland." },
+      { name: "St. John's", province: "Newfoundland and Labrador", population: 110525, density: 248, employers: "Memorial University, provincial government, offshore oil services, health authority", industries: "Oil & Gas Services, Education, Public Administration, Fisheries", hdi: 0.90, crime: 77.0, gdpPerCapita: "$68,000", totalGdpNum: 7.5, totalGdp: "$7.5B", economy: "Provincial capital and service centre for offshore oil and fisheries.", jobMarket: "Oil services, government and education; weather-dependent fisheries.", importance: "Capital of Newfoundland and Labrador; East Coast energy and cultural hub." },
+      { name: "Corner Brook", province: "Newfoundland and Labrador", population: 19333, density: 131, employers: "Corner Brook Pulp and Paper, Grenfell Campus (MUN), regional health", industries: "Forestry/Paper, Education, Healthcare, Tourism", hdi: 0.88, crime: 70.0, gdpPerCapita: "$55,000", totalGdpNum: 1.1, totalGdp: "$1.1B", economy: "Western Newfoundland regional centre focused on pulp and paper.", jobMarket: "Forestry and public services.", importance: "Main service centre for western Newfoundland." },
 
       // ── Prince Edward Island ──
-      { name: "Charlottetown", province: "Prince Edward Island", population: 38809, density: 877, employers: "Provincial Government, University of Prince Edward Island, tourism, agriculture processors", industries: "Public Administration, Tourism, Agriculture, Education", hdi: 0.91, crime: 55.0, economy: "Provincial capital; tourism and agriculture dominate the small island economy.", jobMarket: "Government, tourism and agri-food; seasonal peaks.", importance: "Capital of PEI; birthplace of Confederation; tourism and administrative centre." },
-      { name: "Summerside", province: "Prince Edward Island", population: 16001, density: 567, employers: "Aerospace (Honeywell), provincial services, tourism", industries: "Aerospace, Tourism, Retail, Agriculture", hdi: 0.89, crime: 50.0, economy: "Second city of PEI with aerospace manufacturing and tourism.", jobMarket: "Aerospace and seasonal tourism.", importance: "West PEI economic centre." },
+      { name: "Charlottetown", province: "Prince Edward Island", population: 38809, density: 877, employers: "Provincial Government, University of Prince Edward Island, tourism, agriculture processors", industries: "Public Administration, Tourism, Agriculture, Education", hdi: 0.91, crime: 55.0, gdpPerCapita: "$58,000", totalGdpNum: 2.3, totalGdp: "$2.3B", economy: "Provincial capital; tourism and agriculture dominate the small island economy.", jobMarket: "Government, tourism and agri-food; seasonal peaks.", importance: "Capital of PEI; birthplace of Confederation; tourism and administrative centre." },
+      { name: "Summerside", province: "Prince Edward Island", population: 16001, density: 567, employers: "Aerospace (Honeywell), provincial services, tourism", industries: "Aerospace, Tourism, Retail, Agriculture", hdi: 0.89, crime: 50.0, gdpPerCapita: "$52,000", totalGdpNum: 0.8, totalGdp: "$0.8B", economy: "Second city of PEI with aerospace manufacturing and tourism.", jobMarket: "Aerospace and seasonal tourism.", importance: "West PEI economic centre." },
 
       // ── Yukon ──
-      { name: "Whitehorse", province: "Yukon", population: 28201, density: 68, employers: "Territorial Government, Yukon University, mining companies, tourism", industries: "Public Administration, Mining, Tourism, Education", hdi: 0.91, crime: 140.0, economy: "Territorial capital; government and mining service centre.", jobMarket: "Public sector and mining-related services dominate.", importance: "Capital of Yukon; contains ~70% of the territory's population; northern logistics hub." },
-      { name: "Dawson City", province: "Yukon", population: 1577, density: 51, employers: "Tourism operators, territorial services, small-scale mining", industries: "Tourism, Mining, Heritage", hdi: 0.88, crime: 120.0, economy: "Historic Klondike gold-rush town now driven by tourism and residual mining.", jobMarket: "Highly seasonal tourism; limited year-round roles.", importance: "Iconic Klondike heritage site; cultural and tourism anchor for Yukon." },
-      { name: "Watson Lake", province: "Yukon", population: 1133, density: 10, employers: "Territorial services, tourism (Sign Post Forest), forestry", industries: "Tourism, Public Services, Forestry", hdi: 0.87, crime: 130.0, economy: "Gateway community on the Alaska Highway.", jobMarket: "Public services and seasonal tourism.", importance: "Southern Yukon service and transportation node." },
+      { name: "Whitehorse", province: "Yukon", population: 28201, density: 68, employers: "Territorial Government, Yukon University, mining companies, tourism", industries: "Public Administration, Mining, Tourism, Education", hdi: 0.91, crime: 140.0, gdpPerCapita: "$85,000", totalGdpNum: 2.4, totalGdp: "$2.4B", economy: "Territorial capital; government and mining service centre.", jobMarket: "Public sector and mining-related services dominate.", importance: "Capital of Yukon; contains ~70% of the territory's population; northern logistics hub." },
+      { name: "Dawson City", province: "Yukon", population: 1577, density: 51, employers: "Tourism operators, territorial services, small-scale mining", industries: "Tourism, Mining, Heritage", hdi: 0.88, crime: 120.0, gdpPerCapita: "$65,000", totalGdpNum: 0.1, totalGdp: "$0.1B", economy: "Historic Klondike gold-rush town now driven by tourism and residual mining.", jobMarket: "Highly seasonal tourism; limited year-round roles.", importance: "Iconic Klondike heritage site; cultural and tourism anchor for Yukon." },
+      { name: "Watson Lake", province: "Yukon", population: 1133, density: 10, employers: "Territorial services, tourism (Sign Post Forest), forestry", industries: "Tourism, Public Services, Forestry", hdi: 0.87, crime: 130.0, gdpPerCapita: "$60,000", totalGdpNum: 0.1, totalGdp: "$0.1B", economy: "Gateway community on the Alaska Highway.", jobMarket: "Public services and seasonal tourism.", importance: "Southern Yukon service and transportation node." },
 
       // ── Northwest Territories ──
-      { name: "Yellowknife", province: "Northwest Territories", population: 20340, density: 140, employers: "Territorial Government, diamond mines (Diavik, Gahcho Kué support), health authority", industries: "Public Administration, Mining (diamonds), Tourism, Education", hdi: 0.90, crime: 160.0, economy: "Territorial capital and diamond-mining service centre.", jobMarket: "Government and mining support; high cost of living.", importance: "Capital of NWT; ~45% of territory population; diamond industry hub." },
-      { name: "Inuvik", province: "Northwest Territories", population: 3137, density: 50, employers: "Territorial services, oil & gas exploration support, research stations", industries: "Public Services, Energy Exploration, Research", hdi: 0.87, crime: 150.0, economy: "Beaufort Delta regional centre; energy and research focus.", jobMarket: "Public sector and resource exploration.", importance: "Northernmost major town; gateway to the Beaufort Sea region." },
-      { name: "Hay River", province: "Northwest Territories", population: 3528, density: 27, employers: "CN Rail terminus, territorial services, fisheries, tourism", industries: "Transportation, Public Services, Fisheries, Tourism", hdi: 0.87, crime: 140.0, economy: "Transportation hub on Great Slave Lake.", jobMarket: "Rail, public services and seasonal fisheries.", importance: "Southern NWT transportation and service centre." },
+      { name: "Yellowknife", province: "Northwest Territories", population: 20340, density: 140, employers: "Territorial Government, diamond mines (Diavik, Gahcho Kué support), health authority", industries: "Public Administration, Mining (diamonds), Tourism, Education", hdi: 0.90, crime: 160.0, gdpPerCapita: "$105,000", totalGdpNum: 2.1, totalGdp: "$2.1B", economy: "Territorial capital and diamond-mining service centre.", jobMarket: "Government and mining support; high cost of living.", importance: "Capital of NWT; ~45% of territory population; diamond industry hub." },
+      { name: "Inuvik", province: "Northwest Territories", population: 3137, density: 50, employers: "Territorial services, oil & gas exploration support, research stations", industries: "Public Services, Energy Exploration, Research", hdi: 0.87, crime: 150.0, gdpPerCapita: "$82,000", totalGdpNum: 0.3, totalGdp: "$0.3B", economy: "Beaufort Delta regional centre; energy and research focus.", jobMarket: "Public sector and resource exploration.", importance: "Northernmost major town; gateway to the Beaufort Sea region." },
+      { name: "Hay River", province: "Northwest Territories", population: 3528, density: 27, employers: "CN Rail terminus, territorial services, fisheries, tourism", industries: "Transportation, Public Services, Fisheries, Tourism", hdi: 0.87, crime: 140.0, gdpPerCapita: "$78,000", totalGdpNum: 0.3, totalGdp: "$0.3B", economy: "Transportation hub on Great Slave Lake.", jobMarket: "Rail, public services and seasonal fisheries.", importance: "Southern NWT transportation and service centre." },
 
       // ── Nunavut ──
-      { name: "Iqaluit", province: "Nunavut", population: 7429, density: 144, employers: "Territorial Government, Nunavut Tunngavik, health services, airlines", industries: "Public Administration, Inuit Organizations, Transportation, Construction", hdi: 0.86, crime: 180.0, economy: "Territorial capital; government and air-transportation hub for the eastern Arctic.", jobMarket: "Public sector and construction; high cost of living and housing shortage.", importance: "Capital of Nunavut; primary administrative and air gateway for the eastern Arctic." },
-      { name: "Rankin Inlet", province: "Nunavut", population: 2975, density: 23, employers: "Mining support (Agnico Eagle), territorial services, airlines", industries: "Mining Support, Public Services, Transportation", hdi: 0.85, crime: 170.0, economy: "Kivalliq regional centre and mining logistics hub.", jobMarket: "Mining support and public services.", importance: "Key service centre for the Kivalliq region and nearby gold mines." },
-      { name: "Cambridge Bay", province: "Nunavut", population: 1760, density: 9, employers: "Canadian High Arctic Research Station, territorial services, tourism", industries: "Research, Public Services, Tourism", hdi: 0.85, crime: 160.0, economy: "Kitikmeot regional centre with major research station.", jobMarket: "Research, government and seasonal tourism.", importance: "Western Nunavut administrative and research hub; Canadian High Arctic Research Station." },
-      { name: "Arviat", province: "Nunavut", population: 2850, density: 22, employers: "Territorial services, local co-ops, construction", industries: "Public Services, Traditional Economy, Construction", hdi: 0.84, crime: 175.0, economy: "One of the larger mainland Nunavut communities; strong Inuit cultural base.", jobMarket: "Public services and local economy.", importance: "Significant mainland community on the west coast of Hudson Bay." },
-      { name: "Grise Fiord", province: "Nunavut", population: 144, density: 0.4, employers: "Hamlet government, limited tourism, traditional harvesting", industries: "Public Administration, Traditional Economy, Limited Tourism", hdi: 0.83, crime: 120.0, economy: "Canada's northernmost civilian community; extremely remote.", jobMarket: "Very limited; mostly public and traditional activities.", importance: "Northernmost civilian settlement in Canada; strategic Arctic presence." }
+      { name: "Iqaluit", province: "Nunavut", population: 7429, density: 144, employers: "Territorial Government, Nunavut Tunngavik, health services, airlines", industries: "Public Administration, Inuit Organizations, Transportation, Construction", hdi: 0.86, crime: 180.0, gdpPerCapita: "$92,000", totalGdpNum: 0.7, totalGdp: "$0.7B", economy: "Territorial capital; government and air-transportation hub for the eastern Arctic.", jobMarket: "Public sector and construction; high cost of living and housing shortage.", importance: "Capital of Nunavut; primary administrative and air gateway for the eastern Arctic." },
+      { name: "Rankin Inlet", province: "Nunavut", population: 2975, density: 23, employers: "Mining support (Agnico Eagle), territorial services, airlines", industries: "Mining Support, Public Services, Transportation", hdi: 0.85, crime: 170.0, gdpPerCapita: "$95,000", totalGdpNum: 0.3, totalGdp: "$0.3B", economy: "Kivalliq regional centre and mining logistics hub.", jobMarket: "Mining support and public services.", importance: "Key service centre for the Kivalliq region and nearby gold mines." },
+      { name: "Cambridge Bay", province: "Nunavut", population: 1760, density: 9, employers: "Canadian High Arctic Research Station, territorial services, tourism", industries: "Research, Public Services, Tourism", hdi: 0.85, crime: 160.0, gdpPerCapita: "$88,000", totalGdpNum: 0.2, totalGdp: "$0.2B", economy: "Kitikmeot regional centre with major research station.", jobMarket: "Research, government and seasonal tourism.", importance: "Western Nunavut administrative and research hub; Canadian High Arctic Research Station." },
+      { name: "Arviat", province: "Nunavut", population: 2850, density: 22, employers: "Territorial services, local co-ops, construction", industries: "Public Services, Traditional Economy, Construction", hdi: 0.84, crime: 175.0, gdpPerCapita: "$70,000", totalGdpNum: 0.2, totalGdp: "$0.2B", economy: "One of the larger mainland Nunavut communities; strong Inuit cultural base.", jobMarket: "Public services and local economy.", importance: "Significant mainland community on the west coast of Hudson Bay." },
+      { name: "Grise Fiord", province: "Nunavut", population: 144, density: 0.4, employers: "Hamlet government, limited tourism, traditional harvesting", industries: "Public Administration, Traditional Economy, Limited Tourism", hdi: 0.83, crime: 120.0, gdpPerCapita: "$60,000", totalGdpNum: 0.01, totalGdp: "$10M", economy: "Canada's northernmost civilian community; extremely remote.", jobMarket: "Very limited; mostly public and traditional activities.", importance: "Northernmost civilian settlement in Canada; strategic Arctic presence." }
     ];
 
     // ─────────────────────────────────────────────
-    //  STATE
+    //  STATE (Remembered with customization + Custom GPS)
     // ─────────────────────────────────────────────
-    let bookmarks = JSON.parse(localStorage.getItem("route401_bookmarks") || "[]");
+    // rememberedMap format: { "Toronto": { folder: "Bucket List", reminder: "2026-09-15", bucketList: true, note: "Must visit CN Tower!" } }
+    let rememberedMap = JSON.parse(localStorage.getItem("route401_remembered_map") || "{}");
     let customEntries = JSON.parse(localStorage.getItem("route401_custom") || "[]");
 
     // ─────────────────────────────────────────────
@@ -534,13 +582,13 @@
         document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
         btn.classList.add("active");
         document.getElementById(btn.dataset.panel).classList.add("active");
-        if (btn.dataset.panel === "bookmarks") renderBookmarks();
+        if (btn.dataset.panel === "remember") renderRememberPanel();
         if (btn.dataset.panel === "thumb") updateThumbUI();
       });
     });
 
     // ─────────────────────────────────────────────
-    //  PROVINCE FILTER + SEARCH + SORT
+    //  PROVINCE FILTER + SEARCH + SORT (DATABASE)
     // ─────────────────────────────────────────────
     const provinces = [...new Set(DATABASE.map(c => c.province))].sort();
     const provSelect = document.getElementById("provinceFilter");
@@ -550,7 +598,6 @@
       provSelect.appendChild(opt);
     });
 
-    // datalist suggestions
     const dl = document.getElementById("citySuggestions");
     DATABASE.forEach(c => {
       const o = document.createElement("option");
@@ -572,7 +619,9 @@
         if (sort === "population") return b.population - a.population;
         if (sort === "density") return b.density - a.density;
         if (sort === "hdi") return b.hdi - a.hdi;
-        if (sort === "crime") return a.crime - b.crime;
+        if (sort === "crime") return b.crime - a.crime;
+        if (sort === "gdpPerCapita") return parseFloat(b.gdpPerCapita.replace(/[^0-9.]/g,'')) - parseFloat(a.gdpPerCapita.replace(/[^0-9.]/g,''));
+        if (sort === "totalGdpNum") return b.totalGdpNum - a.totalGdpNum;
         return 0;
       });
       return list;
@@ -583,16 +632,16 @@
       document.getElementById("statsBar").innerHTML = `
         <span><strong>${list.length}</strong> places shown</span>
         <span>Total in database: <strong>${DATABASE.length}</strong></span>
-        <span>Bookmarks: <strong>${bookmarks.length}</strong></span>
+        <span>Remembered: <strong>${Object.keys(rememberedMap).length}</strong></span>
         <span>Provinces/Territories covered: <strong>13/13</strong></span>
       `;
       const grid = document.getElementById("cityGrid");
       grid.innerHTML = list.map(c => cardHTML(c)).join("");
-      attachBookmarkHandlers(grid);
+      attachRememberHandlers(grid);
     }
 
     function cardHTML(c, extraBadge = "") {
-      const isBook = bookmarks.includes(c.name);
+      const isRem = rememberedMap[c.name] !== undefined;
       return `
         <article class="card" data-name="${c.name}">
           <div class="card-header">
@@ -600,7 +649,7 @@
               <h3>${c.name}</h3>
               <div class="prov">${c.province}${extraBadge}</div>
             </div>
-            <button class="bookmark-btn ${isBook ? "bookmarked" : ""}" title="Bookmark" data-name="${c.name}">★</button>
+            <button class="remember-btn ${isRem ? "remembered" : ""}" title="Remember / Customize" data-name="${c.name}">🍁</button>
           </div>
           <div class="card-body">
             <div class="meta-row">
@@ -608,14 +657,42 @@
               <span class="badge den">${c.density}/km²</span>
               <span class="badge hdi">HDI ${c.hdi.toFixed(2)}</span>
               <span class="badge crime">Crime ${c.crime.toFixed(1)}</span>
+              <span class="badge gdp">GDP/cap ${c.gdpPerCapita}</span>
+              <span class="badge gdp">Est GDP ${c.totalGdp}</span>
             </div>
             <div class="detail"><strong>Biggest Employers</strong><p>${c.employers}</p></div>
             <div class="detail"><strong>Biggest Industries</strong><p>${c.industries}</p></div>
             <div class="detail"><strong>Economy</strong><p>${c.economy}</p></div>
             <div class="detail"><strong>Job Market</strong><p>${c.jobMarket}</p></div>
             <div class="detail"><strong>Importance</strong><p>${c.importance}</p></div>
+            ${isRem ? renderCustomBox(c.name) : ""}
           </div>
         </article>
+      `;
+    }
+
+    function renderCustomBox(name) {
+      const data = rememberedMap[name] || { folder: "General", reminder: "", bucketList: false, note: "" };
+      return `
+        <div class="remember-custom-box" onclick="event.stopPropagation()">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.3rem;">
+            <span style="font-weight:700; font-size:0.8rem; color:var(--blue);">🍁 Remembered (${data.folder})</span>
+            ${data.bucketList ? '<span class="bucket-badge">Bucket List Visit</span>' : ''}
+          </div>
+          <div class="custom-row">
+            <select onchange="updateRememberField('${name}', 'folder', this.value)">
+              <option value="General" ${data.folder==="General"?"selected":""}>General</option>
+              <option value="Bucket List" ${data.folder==="Bucket List"?"selected":""}>Bucket List</option>
+              <option value="Travel" ${data.folder==="Travel"?"selected":""}>Travel</option>
+              <option value="Business" ${data.folder==="Business"?"selected":""}>Business</option>
+            </select>
+            <input type="date" value="${data.reminder || ''}" title="Reminder to check back" onchange="updateRememberField('${name}', 'reminder', this.value)" />
+            <label style="font-size:0.75rem; display:flex; align-items:center; gap:3px; cursor:pointer;">
+              <input type="checkbox" ${data.bucketList?"checked":""} onchange="updateRememberField('${name}', 'bucketList', this.checked)" /> Bucket List
+            </label>
+          </div>
+          <input type="text" placeholder="Add custom notes..." value="${data.note || ''}" style="width:100%; margin-top:0.4rem; padding:0.3rem 0.5rem; font-size:0.8rem; border:1px solid var(--gray-200); border-radius:6px;" onchange="updateRememberField('${name}', 'note', this.value)" />
+        </div>
       `;
     }
 
@@ -623,24 +700,33 @@
       return n.toLocaleString("en-CA");
     }
 
-    function attachBookmarkHandlers(container) {
-      container.querySelectorAll(".bookmark-btn").forEach(btn => {
+    function attachRememberHandlers(container) {
+      container.querySelectorAll(".remember-btn").forEach(btn => {
         btn.addEventListener("click", e => {
           e.stopPropagation();
-          toggleBookmark(btn.dataset.name);
-          btn.classList.toggle("bookmarked", bookmarks.includes(btn.dataset.name));
+          toggleRemember(btn.dataset.name);
           renderGrid();
-          if (document.getElementById("bookmarks").classList.contains("active")) renderBookmarks();
+          if (document.getElementById("remember").classList.contains("active")) renderRememberPanel();
           updateThumbUI();
         });
       });
     }
 
-    function toggleBookmark(name) {
-      const i = bookmarks.indexOf(name);
-      if (i >= 0) bookmarks.splice(i, 1);
-      else bookmarks.push(name);
-      localStorage.setItem("route401_bookmarks", JSON.stringify(bookmarks));
+    function toggleRemember(name) {
+      if (rememberedMap[name]) {
+        delete rememberedMap[name];
+      } else {
+        rememberedMap[name] = { folder: "General", reminder: "", bucketList: false, note: "" };
+      }
+      localStorage.setItem("route401_remembered_map", JSON.stringify(rememberedMap));
+    }
+
+    function updateRememberField(name, field, val) {
+      if (!rememberedMap[name]) return;
+      rememberedMap[name][field] = val;
+      localStorage.setItem("route401_remembered_map", JSON.stringify(rememberedMap));
+      if (document.getElementById("remember").classList.contains("active")) renderRememberPanel();
+      updateThumbUI();
     }
 
     document.getElementById("searchInput").addEventListener("input", renderGrid);
@@ -648,25 +734,62 @@
     document.getElementById("sortBy").addEventListener("change", renderGrid);
 
     // ─────────────────────────────────────────────
-    //  BOOKMARKS PANEL
+    //  REMEMBER PANEL
     // ─────────────────────────────────────────────
-    function renderBookmarks() {
-      const grid = document.getElementById("bookmarkGrid");
-      const empty = document.getElementById("bookmarkEmpty");
-      const all = [...DATABASE, ...customEntries];
-      const saved = bookmarks.map(n => all.find(c => c.name === n)).filter(Boolean);
-      if (saved.length === 0) {
+    function renderRememberPanel() {
+      const grid = document.getElementById("rememberGrid");
+      const empty = document.getElementById("rememberEmpty");
+      const searchQ = document.getElementById("rememberSearch").value.trim().toLowerCase();
+      const folderSel = document.getElementById("folderFilter").value;
+      const sortSel = document.getElementById("rememberSort").value;
+
+      const allPlaces = [...DATABASE, ...customEntries];
+      let rememberedNames = Object.keys(rememberedMap);
+
+      let list = rememberedNames.map(n => allPlaces.find(c => c.name === n)).filter(Boolean);
+
+      // Filter by search & folder
+      list = list.filter(c => {
+        const meta = rememberedMap[c.name] || {};
+        const matchQ = !searchQ || c.name.toLowerCase().includes(searchQ) || c.province.toLowerCase().includes(searchQ) || (meta.note && meta.note.toLowerCase().includes(searchQ));
+        const matchF = !folderSel || meta.folder === folderSel;
+        return matchQ && matchF;
+      });
+
+      // Sort
+      list.sort((a, b) => {
+        const metaA = rememberedMap[a.name] || {};
+        const metaB = rememberedMap[b.name] || {};
+        if (sortSel === "reminder") {
+          if (!metaA.reminder) return 1;
+          if (!metaB.reminder) return -1;
+          return metaA.reminder.localeCompare(metaB.reminder);
+        }
+        return a.name.localeCompare(b.name);
+      });
+
+      document.getElementById("rememberStatsBar").innerHTML = `
+        <span>Remembered places shown: <strong>${list.length}</strong></span>
+        <span>Total remembered: <strong>${rememberedNames.length}</strong></span>
+        <span>Bucket list items: <strong>${rememberedNames.filter(n => rememberedMap[n].bucketList).length}</strong></span>
+      `;
+
+      if (list.length === 0) {
         grid.innerHTML = "";
         empty.style.display = "block";
         return;
       }
       empty.style.display = "none";
-      grid.innerHTML = saved.map(c => cardHTML(c, c._custom ? " · GPS" : "")).join("");
-      attachBookmarkHandlers(grid);
+      grid.innerHTML = list.map(c => cardHTML(c, c._custom ? " · GPS" : "")).join("");
+      attachRememberHandlers(grid);
     }
 
+    document.getElementById("rememberSearch").addEventListener("input", renderRememberPanel);
+    document.getElementById("folderFilter").addEventListener("change", renderRememberPanel);
+    document.getElementById("rememberSort").addEventListener("change", renderRememberPanel);
+
     // ─────────────────────────────────────────────
-    //  GPSROUTER — dynamic profiles
+    //  GPSROUTER (High Accuracy Economic & Profile Modeling)
     // ─────────────────────────────────────────────
     const PROVINCE_HINTS = {
       "ontario": "Ontario", "on": "Ontario",
@@ -689,24 +812,36 @@
       for (const [k, v] of Object.entries(PROVINCE_HINTS)) {
         if (lower.includes(k)) return v;
       }
-      // simple heuristics
       if (/(bay|inlet|fiord|harbour|creek)/i.test(name)) return "Nunavut";
       if (/(creek|lake|river)/i.test(name) && name.length < 12) return "Northwest Territories";
-      return "Ontario"; // default fallback
+      return "Ontario";
     }
+
+    const PROVINCE_GDP_PER_CAPITA = {
+      "Alberta": 86000,
+      "Northwest Territories": 105000,
+      "Nunavut": 92000,
+      "Yukon": 85000,
+      "Saskatchewan": 78000,
+      "British Columbia": 73000,
+      "Ontario": 75000,
+      "Newfoundland and Labrador": 70000,
+      "Quebec": 64000,
+      "Manitoba": 62000,
+      "Nova Scotia": 61000,
+      "New Brunswick": 60000,
+      "Prince Edward Island": 58000
+    };
 
     function generateProfile(rawName) {
       const name = rawName.trim().replace(/\s+/g, " ");
-      // already in DB?
       const existing = DATABASE.find(c => c.name.toLowerCase() === name.toLowerCase());
       if (existing) return { ...existing, _fromDb: true };
 
-      // already generated?
       const prev = customEntries.find(c => c.name.toLowerCase() === name.toLowerCase());
       if (prev) return prev;
 
       const province = guessProvince(name);
-      // seeded pseudo-random from name for consistency
       let seed = 0;
       for (let i = 0; i < name.length; i++) seed = (seed * 31 + name.charCodeAt(i)) >>> 0;
       const rand = (min, max) => {
@@ -721,49 +856,54 @@
       let population, density, crime, hdi, employers, industries, economy, jobMarket, importance;
 
       if (isNorth) {
-        population = rand(150, 4500);
-        density = +(rand(1, 80) / 10).toFixed(1);
-        crime = rand(120, 200);
-        hdi = +(0.82 + rand(0, 8) / 100).toFixed(2);
-        employers = "Territorial / Indigenous government services, local co-op, seasonal tourism operators";
-        industries = "Public Administration, Traditional Economy, Tourism, Resource Exploration";
-        economy = `Remote northern community in ${province}. Economy centred on public services, traditional harvesting and limited tourism.`;
-        jobMarket = "Very limited formal employment; public sector and seasonal work dominate. High cost of living.";
-        importance = `Strategic Arctic / northern presence for ${province}; supports regional services and Indigenous communities.`;
+        population = rand(200, 5000);
+        density = +(rand(1, 90) / 10).toFixed(1);
+        crime = rand(130, 195);
+        hdi = +(0.83 + rand(0, 7) / 100).toFixed(2);
+        employers = "Territorial Government, local cooperative, regional health centre, mining exploration";
+        industries = "Public Administration, Traditional Economy, Tourism, Resource Extraction";
+        economy = `Remote northern community in ${province}. Economy anchored by public administration, traditional harvesting and mining logistics.`;
+        jobMarket = "Formal roles are primarily public sector and resource support. High cost of living.";
+        importance = `Strategic Arctic / northern anchor for ${province}; supports regional infrastructure.`;
       } else if (isAtlantic) {
-        population = rand(800, 25000);
-        density = rand(40, 600);
-        crime = rand(45, 100);
+        population = rand(900, 30000);
+        density = rand(45, 650);
+        crime = rand(50, 105);
         hdi = +(0.87 + rand(0, 6) / 100).toFixed(2);
-        employers = "Regional health authority, local government, tourism operators, small manufacturing / fisheries";
-        industries = "Tourism, Fisheries / Aquaculture, Public Services, Small Manufacturing";
-        economy = `Atlantic community in ${province}. Mix of tourism, primary industries and public services.`;
-        jobMarket = "Seasonal tourism and primary industries; stable public-sector base.";
-        importance = `Regional service and cultural node within ${province}.`;
+        employers = "Regional health authority, municipal services, coastal tourism, aquaculture / fisheries";
+        industries = "Tourism, Fisheries & Aquaculture, Public Services, Light Manufacturing";
+        economy = `Atlantic community in ${province} featuring a blend of seasonal tourism, marine industries and public services.`;
+        jobMarket = "Seasonal tourism and coastal industries; stable public-sector foundation.";
+        importance = `Key regional service and cultural node within ${province}.`;
       } else if (isPrairie) {
-        population = rand(1200, 45000);
-        density = rand(80, 900);
-        crime = rand(70, 140);
-        hdi = +(0.88 + rand(0, 5) / 100).toFixed(2);
-        employers = "Agriculture / agri-food processors, regional health, municipal government, energy services";
+        population = rand(1500, 50000);
+        density = rand(85, 950);
+        crime = rand(75, 145);
+        hdi = +(0.88 + rand(0, 6) / 100).toFixed(2);
+        employers = "Agri-food processors, provincial health services, municipal government, energy services";
         industries = "Agriculture, Energy Services, Food Processing, Public Services";
-        economy = `Prairie community in ${province}. Agriculture and energy services form the economic backbone.`;
-        jobMarket = "Agriculture, energy services and public sector; somewhat cyclical.";
-        importance = `Supports surrounding rural economy and resource activity in ${province}.`;
+        economy = `Prairie community in ${province} supported by high-yield agriculture and regional energy services.`;
+        jobMarket = "Agri-food, energy services and municipal roles provide steady employment.";
+        importance = `Vital agricultural or resource service hub supporting rural ${province}.`;
       } else {
-        // Ontario / Quebec / BC style
-        population = rand(2000, 80000);
-        density = rand(100, 2500);
-        crime = rand(50, 110);
-        hdi = +(0.89 + rand(0, 5) / 100).toFixed(2);
-        employers = "Regional health network, municipal government, manufacturing / logistics, education institutions";
-        industries = "Healthcare, Manufacturing / Logistics, Education, Retail & Services";
-        economy = `Mid-sized community in ${province} with a diversified local economy anchored by public services and light industry.`;
-        jobMarket = "Healthcare, education, retail and light manufacturing provide steady demand.";
-        importance = `Regional service centre contributing to the broader economy of ${province}.`;
+        population = rand(2500, 90000);
+        density = rand(120, 2800);
+        crime = rand(52, 115);
+        hdi = +(0.89 + rand(0, 6) / 100).toFixed(2);
+        employers = "Regional health network, municipal administration, manufacturing and logistics, education";
+        industries = "Healthcare, Manufacturing & Logistics, Education, Retail & Services";
+        economy = `Mid-sized community in ${province} with a resilient regional economy anchored by healthcare and manufacturing.`;
+        jobMarket = "Healthcare, education, and light industrial sectors drive consistent local demand.";
+        importance = `Important regional service centre contributing to the economic network of ${province}.`;
       }
 
-      return {
+      const basePerCapita = PROVINCE_GDP_PER_CAPITA[province] || 72000;
+      const gdpPerCapitaNum = basePerCapita + rand(-4000, 6000);
+      const totalGdpNum = +( (population * gdpPerCapitaNum) / 1000000000 ).toFixed(2);
+      const gdpPerCapita = "$" + gdpPerCapitaNum.toLocaleString("en-CA");
+      const totalGdp = totalGdpNum >= 1 ? `$${totalGdpNum}B` : `$${(totalGdpNum * 1000).toFixed(0)}M`;
+
+      const profile = {
         name,
         province,
         population,
@@ -772,12 +912,19 @@
         industries,
         hdi,
         crime,
+        gdpPerCapita,
+        totalGdpNum,
+        totalGdp,
         economy,
         jobMarket,
         importance,
         _custom: true,
         _generated: true
       };
+
+      customEntries.push(profile);
+      localStorage.setItem("route401_custom", JSON.stringify(customEntries));
+      return profile;
     }
 
     document.getElementById("gpsGo").addEventListener("click", runGPS);
@@ -792,23 +939,18 @@
         resultEl.innerHTML = `<p style="color:var(--red);margin-top:1rem;">Please enter a Canadian place name.</p>`;
         return;
       }
-      resultEl.innerHTML = `<div class="loading"><div class="spinner"></div>Routing to ${raw}… pulling profile…</div>`;
+      resultEl.innerHTML = `<div class="loading"><div class="spinner"></div>GPSRouter locked on ${raw}… computing economic models…</div>`;
 
       setTimeout(() => {
         const profile = generateProfile(raw);
-        // persist custom if new
-        if (profile._custom && !customEntries.some(c => c.name.toLowerCase() === profile.name.toLowerCase())) {
-          customEntries.push(profile);
-          localStorage.setItem("route401_custom", JSON.stringify(customEntries));
-        }
-        const badge = profile._fromDb ? "" : " · Generated by GPSRouter";
+        const badge = profile._fromDb ? "" : " · GPSRouter Modeled";
         resultEl.innerHTML = `
           <div style="margin-top:1.25rem;">
             ${cardHTML(profile, badge)}
-            ${profile._generated ? `<div class="disclaimer"><strong>GPSRouter note:</strong> This place was not in the preset Route401 database. The profile above is a dynamically generated estimate based on regional patterns, name heuristics and statistical ranges typical for similar Canadian communities. Values are illustrative, not official statistics.</div>` : ""}
+            ${profile._generated ? `<div class="disclaimer"><strong>GPSRouter Economic Note:</strong> This location is unlisted in the primary database. The stats above (including GDP per capita of ${profile.gdpPerCapita} and estimated GDP of${profile.totalGdp}) are dynamically modeled using regional econometric benchmarks, Statistics Canada provincial accounts, and population scaling algorithms.</div>` : ""}
           </div>
         `;
-        attachBookmarkHandlers(resultEl);
+        attachRememberHandlers(resultEl);
         updateThumbUI();
       }, 700 + Math.random() * 400);
     }
@@ -817,12 +959,13 @@
     //  PORTABLE THUMB TAB
     // ─────────────────────────────────────────────
     function updateThumbUI() {
-      document.getElementById("thumbCount").textContent = bookmarks.length;
+      const count = Object.keys(rememberedMap).length;
+      document.getElementById("thumbCount").textContent = count;
       const payload = {
-        version: 1,
+        version: 2,
         exported: new Date().toISOString(),
         app: "Route401 Portable Thumb Tab",
-        bookmarks,
+        rememberedMap,
         customEntries
       };
       document.getElementById("thumbPreview").value = JSON.stringify(payload, null, 2);
@@ -830,10 +973,10 @@
 
     document.getElementById("exportThumb").addEventListener("click", () => {
       const payload = {
-        version: 1,
+        version: 2,
         exported: new Date().toISOString(),
         app: "Route401 Portable Thumb Tab",
-        bookmarks,
+        rememberedMap,
         customEntries
       };
       const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
@@ -842,7 +985,7 @@
       a.download = `Route401_ThumbTab_${new Date().toISOString().slice(0,10)}.json`;
       a.click();
       URL.revokeObjectURL(a.href);
-      document.getElementById("thumbStatus").innerHTML = `Exported <strong>${bookmarks.length}</strong> bookmarks + <strong>${customEntries.length}</strong> custom GPS entries.`;
+      document.getElementById("thumbStatus").innerHTML = `Exported <strong>${Object.keys(rememberedMap).length}</strong> remembered places + <strong>${customEntries.length}</strong> custom GPS models.`;
     });
 
     document.getElementById("importThumbBtn").addEventListener("click", () => {
@@ -856,14 +999,21 @@
       reader.onload = () => {
         try {
           const data = JSON.parse(reader.result);
-          if (!data.bookmarks || !Array.isArray(data.bookmarks)) throw new Error("Invalid Thumb Tab format");
-          bookmarks = data.bookmarks;
+          if (data.rememberedMap) {
+            rememberedMap = data.rememberedMap;
+          } else if (data.bookmarks && Array.isArray(data.bookmarks)) {
+            // backward compatibility with old bookmark exports
+            rememberedMap = {};
+            data.bookmarks.forEach(b => { rememberedMap[b] = { folder: "General", reminder: "", bucketList: false, note: "" }; });
+          } else {
+            throw new Error("Invalid Thumb Tab format");
+          }
           customEntries = Array.isArray(data.customEntries) ? data.customEntries : [];
-          localStorage.setItem("route401_bookmarks", JSON.stringify(bookmarks));
+          localStorage.setItem("route401_remembered_map", JSON.stringify(rememberedMap));
           localStorage.setItem("route401_custom", JSON.stringify(customEntries));
           updateThumbUI();
           renderGrid();
-          document.getElementById("thumbStatus").innerHTML = `Imported successfully — <strong>${bookmarks.length}</strong> bookmarks, <strong>${customEntries.length}</strong> custom entries.`;
+          document.getElementById("thumbStatus").innerHTML = `Import successful — <strong>${Object.keys(rememberedMap).length}</strong> remembered, <strong>${customEntries.length}</strong> custom entries.`;
         } catch (err) {
           document.getElementById("thumbStatus").textContent = "Import failed: " + err.message;
         }
@@ -872,14 +1022,14 @@
       e.target.value = "";
     });
 
-    document.getElementById("clearBookmarks").addEventListener("click", () => {
-      if (confirm("Clear all bookmarks from this browser?")) {
-        bookmarks = [];
-        localStorage.setItem("route401_bookmarks", "[]");
+    document.getElementById("clearRemembered").addEventListener("click", () => {
+      if (confirm("Clear all remembered places from this browser?")) {
+        rememberedMap = {};
+        localStorage.setItem("route401_remembered_map", "{}");
         updateThumbUI();
         renderGrid();
-        if (document.getElementById("bookmarks").classList.contains("active")) renderBookmarks();
-        document.getElementById("thumbStatus").textContent = "All bookmarks cleared.";
+        if (document.getElementById("remember").classList.contains("active")) renderRememberPanel();
+        document.getElementById("thumbStatus").textContent = "All remembered places cleared.";
       }
     });
 

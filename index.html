@@ -4,33 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Route401 — Global & Canadian Intelligence Matrix</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg-deep: #030712;
-      --bg-panel: rgba(10, 15, 30, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.1);
-      --neon-cyan: #00f3ff;
-      --neon-magenta: #e81cff;
-      --gold: #fbbf24;
-      --red: #ff3344;
-      --green: #00ff66;
-      --text-main: #f3f4f6;
-      --text-dim: #9ca3af;
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-      --radius: 14px;
+      /* Canadian Premium Color Palette */
+      --canadian-red: #D80027;
+      --canadian-red-dark: #A3001C;
+      --canadian-red-glow: rgba(216, 0, 39, 0.35);
+      --maple-gold: #FFB703;
+      --maple-gold-glow: rgba(255, 183, 3, 0.25);
+      --snow-white: #FFFFFF;
+      --ice-blue: #EBF3FA;
+      
+      /* Dark Theme Canadian Shield Backgrounds */
+      --bg-deep: #080A0F;
+      --bg-panel: rgba(18, 22, 32, 0.78);
+      --bg-card: rgba(23, 29, 42, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --glass-border-red: rgba(216, 0, 39, 0.3);
+      
+      /* Text & Accents */
+      --text-main: #F3F6FC;
+      --text-dim: #94A3B8;
+      --text-muted: #64748B;
+      --green: #10B981;
+      --blue: #3B82F6;
+      
+      --shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      --shadow-red: 0 8px 30px rgba(216, 0, 39, 0.25);
+      --radius: 16px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
     
     body {
       background-color: var(--bg-deep);
       color: var(--text-main);
       min-height: 100vh;
-      line-height: 1.4;
+      line-height: 1.5;
       -webkit-text-size-adjust: 100%;
-      background-image: radial-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px);
-      background-size: 24px 24px;
+      /* Northern Lights Aurora & Forest Subtle Background */
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(216, 0, 39, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 183, 3, 0.03) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(8, 10, 15, 0.95), rgba(8, 10, 15, 0.98));
+      background-attachment: fixed;
     }
 
     /* Motorola Moto G Play (2024) 720x1600 Viewport Scaler */
@@ -44,24 +64,24 @@
     /* Desktop Viewport Control Toolbar */
     .desktop-control-bar {
       display: none;
-      background: #050b14;
+      background: #04060A;
       color: var(--text-dim);
-      padding: 8px 20px;
-      font-size: 0.75rem;
+      padding: 8px 24px;
+      font-size: 0.78rem;
       justify-content: flex-end;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       border-bottom: 1px solid var(--glass-border);
     }
     .desktop-control-bar label {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       cursor: pointer;
     }
     .desktop-control-bar input[type="range"] {
-      width: 130px;
-      accent-color: var(--neon-cyan);
+      width: 140px;
+      accent-color: var(--canadian-red);
       cursor: pointer;
     }
     @media (min-width: 768px) {
@@ -70,24 +90,24 @@
 
     /* Header & Navigation */
     header {
-      background: var(--bg-panel);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 2px solid var(--neon-cyan);
-      padding: 12px 16px;
-      box-shadow: 0 4px 25px rgba(0, 243, 255, 0.15);
+      background: rgba(12, 16, 24, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border-red);
+      padding: 14px 20px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
       position: sticky;
       top: 0;
       z-index: 100;
     }
     .header-inner {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
-    @media (min-width: 540px) {
+    @media (min-width: 680px) {
       .header-inner {
         flex-direction: row;
         align-items: center;
@@ -97,236 +117,280 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .logo-icon {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
-      border-radius: 50%;
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
       display: grid;
       place-items: center;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Cinzel', serif;
       font-weight: 800;
-      color: #030712;
-      font-size: 0.9rem;
-      box-shadow: 0 0 12px var(--neon-cyan);
+      color: #fff;
+      font-size: 1.05rem;
+      box-shadow: var(--shadow-red);
       flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-icon::after {
+      content: '🍁';
+      position: absolute;
+      font-size: 1.4rem;
+      opacity: 0.15;
+      right: -4px;
+      bottom: -6px;
     }
     .logo h1 {
       font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 800;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       color: #fff;
-      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .logo span {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
-      color: var(--neon-cyan);
+    .logo h1 span.maple-leaf {
+      color: var(--canadian-red);
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px var(--canadian-red-glow);
+    }
+    .logo span.subtag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--maple-gold);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       display: block;
+      font-weight: 700;
     }
     nav {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       overflow-x: auto;
       padding-bottom: 2px;
       scrollbar-width: none;
     }
     nav::-webkit-scrollbar { display: none; }
     nav button {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--glass-border);
       color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 999px;
+      padding: 9px 16px;
+      border-radius: 12px;
       cursor: pointer;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       font-weight: 600;
       white-space: nowrap;
-      transition: all 0.2s;
-      min-height: 38px;
+      transition: all 0.25s ease;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    nav button:hover, nav button.active {
-      background: var(--neon-cyan);
-      color: #030712;
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 12px var(--neon-cyan);
+    nav button:hover {
+      background: rgba(216, 0, 39, 0.15);
+      border-color: rgba(216, 0, 39, 0.4);
+      color: #fff;
+    }
+    nav button.active {
+      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: var(--shadow-red);
     }
 
     main {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 16px;
+      padding: 20px 16px;
     }
     .panel { display: none; }
-    .panel.active { display: block; animation: fadeIn 0.25s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .panel.active { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     /* Controls & Filters */
     .controls {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 16px;
+      gap: 12px;
+      margin-bottom: 18px;
     }
-    @media (min-width: 540px) {
+    @media (min-width: 640px) {
       .controls { flex-direction: row; flex-wrap: wrap; align-items: center; }
     }
     .controls input, .controls select {
       width: 100%;
-      padding: 12px 14px;
-      background: rgba(255, 255, 255, 0.06);
+      padding: 12px 16px;
+      background: var(--bg-card);
       border: 1px solid var(--glass-border);
-      border-radius: 10px;
-      font-size: 16px; /* Prevents auto-zoom on mobile */
+      border-radius: 12px;
+      font-size: 15px;
       color: white;
       outline: none;
-      transition: border-color 0.2s;
-      min-height: 46px;
+      transition: all 0.2s ease;
+      min-height: 48px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    @media (min-width: 540px) {
-      .controls input, .controls select { flex: 1; min-width: 150px; }
+    @media (min-width: 640px) {
+      .controls input, .controls select { flex: 1; min-width: 170px; }
     }
     .controls input:focus, .controls select:focus {
-      border-color: var(--neon-cyan);
-      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--canadian-red);
+      box-shadow: 0 0 0 3px var(--canadian-red-glow);
+      background: rgba(28, 35, 50, 0.95);
     }
-    .controls select option { background: #0b1329; color: white; }
+    .controls select option { background: #0f1420; color: white; }
 
     .stats-bar {
       background: var(--bg-panel);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
+      border-left: 4px solid var(--canadian-red);
       border-radius: var(--radius);
-      padding: 12px 16px;
+      padding: 12px 20px;
       box-shadow: var(--shadow);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-size: 0.82rem;
+      gap: 8px;
+      font-size: 0.85rem;
       color: var(--text-dim);
     }
-    @media (min-width: 480px) {
-      .stats-bar { flex-direction: row; flex-wrap: wrap; gap: 16px; }
+    @media (min-width: 520px) {
+      .stats-bar { flex-direction: row; flex-wrap: wrap; gap: 20px; align-items: center; }
     }
-    .stats-bar strong { color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; font-size: 0.85rem; }
+    .stats-bar strong { color: var(--maple-gold); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
 
-    /* Grid Layout */
+    /* Grid Layout & Canadian Cards */
     .grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 20px;
     }
     @media (min-width: 768px) {
-      .grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
     }
     .card {
-      background: var(--bg-panel);
-      backdrop-filter: blur(10px);
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .card:hover {
-      border-color: rgba(0, 243, 255, 0.4);
-      box-shadow: 0 10px 30px rgba(0, 243, 255, 0.15);
-      transform: translateY(-2px);
+      border-color: rgba(216, 0, 39, 0.4);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(216, 0, 39, 0.15);
+      transform: translateY(-3px);
     }
     .card-header {
-      background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(232, 28, 255, 0.08));
+      background: linear-gradient(135deg, rgba(216, 0, 39, 0.12), rgba(255, 183, 3, 0.05));
       border-bottom: 1px solid var(--glass-border);
-      padding: 14px 16px;
+      padding: 16px 18px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 10px;
+      gap: 12px;
     }
     .card-header h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: #fff;
       font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
     }
     .card-header .prov {
-      font-size: 0.75rem;
-      color: var(--neon-cyan);
-      margin-top: 2px;
-      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
+      color: var(--maple-gold);
+      margin-top: 3px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
     .remember-btn {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--glass-border);
-      color: var(--text-main);
-      width: 38px; height: 38px;
+      color: var(--text-dim);
+      width: 40px; height: 40px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.1rem;
       display: grid;
       place-items: center;
-      transition: all 0.2s;
+      transition: all 0.25s ease;
       flex-shrink: 0;
     }
-    .remember-btn:hover, .remember-btn.remembered {
-      background: var(--neon-magenta);
-      color: white;
-      border-color: var(--neon-magenta);
-      box-shadow: 0 0 12px var(--neon-magenta);
+    .remember-btn:hover {
+      background: rgba(216, 0, 39, 0.2);
+      border-color: var(--canadian-red);
+      color: var(--canadian-red);
+      transform: scale(1.08);
+    }
+    .remember-btn.remembered {
+      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: var(--shadow-red);
       transform: scale(1.05);
     }
-    .card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; }
+
+    .card-body { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
     .meta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 12px;
     }
     .badge {
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--glass-border);
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 0.73rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
       font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
     }
-    .badge.pop { color: var(--neon-cyan); }
-    .badge.den { color: var(--green); }
-    .badge.hdi { color: var(--gold); }
-    .badge.crime { color: var(--red); }
-    .badge.gdp { color: var(--neon-magenta); }
-    .badge.global { background: rgba(232, 28, 255, 0.15); color: var(--neon-magenta); border-color: rgba(232, 28, 255, 0.3); }
+    .badge.pop { color: #60A5FA; border-color: rgba(96, 165, 250, 0.2); }
+    .badge.den { color: #34D399; border-color: rgba(52, 211, 153, 0.2); }
+    .badge.hdi { color: var(--maple-gold); border-color: rgba(255, 183, 3, 0.2); }
+    .badge.crime { color: #F87171; border-color: rgba(248, 113, 113, 0.2); }
+    .badge.gdp { color: #C084FC; border-color: rgba(192, 132, 252, 0.2); }
+    .badge.global { background: rgba(59, 130, 246, 0.12); color: #93C5FD; border-color: rgba(59, 130, 246, 0.3); }
 
     .detail {
-      margin-bottom: 10px;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.03);
     }
     .detail strong {
       display: block;
-      font-size: 0.68rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--text-dim);
-      margin-bottom: 2px;
-      font-family: 'Orbitron', sans-serif;
+      color: var(--maple-gold);
+      margin-bottom: 3px;
+      font-weight: 700;
     }
-    .detail p { color: #d1d5db; }
+    .detail p { color: #E2E8F0; line-height: 1.45; }
 
     /* Customization Box inside Remembered Cards (2028 Focus) */
     .remember-custom-box {
       margin-top: auto;
-      padding-top: 12px;
-      border-top: 1px solid var(--glass-border);
-      font-size: 0.8rem;
-      background: rgba(0, 0, 0, 0.25);
-      margin: 10px -16px -16px -16px;
-      padding: 12px 16px;
+      padding: 14px;
+      border-top: 1px solid var(--glass-border-red);
+      font-size: 0.82rem;
+      background: linear-gradient(to bottom, rgba(216, 0, 39, 0.06), rgba(0, 0, 0, 0.3));
+      margin: 8px -18px -16px -18px;
       border-bottom-left-radius: var(--radius);
       border-bottom-right-radius: var(--radius);
     }
@@ -335,173 +399,183 @@
       flex-wrap: wrap;
       gap: 8px;
       align-items: center;
-      margin-top: 6px;
+      margin-top: 8px;
     }
-    .custom-row select, .custom-row input {
-      padding: 6px 10px;
-      background: rgba(255, 255, 255, 0.08);
+    .custom-row select, .custom-row input[type="date"] {
+      padding: 8px 10px;
+      background: rgba(15, 20, 30, 0.9);
       border: 1px solid var(--glass-border);
-      border-radius: 6px;
-      font-size: 0.78rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
       color: white;
-      min-height: 36px;
+      min-height: 38px;
       outline: none;
     }
     .custom-row select option { background: #0b1329; color: white; }
     .bucket-badge {
-      background: rgba(251, 191, 36, 0.15);
-      color: var(--gold);
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 0.7rem;
+      background: rgba(255, 183, 3, 0.18);
+      color: var(--maple-gold);
+      border: 1px solid rgba(255, 183, 3, 0.4);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
       font-weight: 700;
     }
 
     /* GPSRouter v3 */
     .gps-box {
       background: var(--bg-panel);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
+      border-top: 3px solid var(--canadian-red);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 20px;
+      padding: 24px;
       max-width: 100%;
-      margin: 0 auto 16px;
+      margin: 0 auto 20px;
     }
     .gps-box h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       margin-bottom: 6px;
-      color: var(--neon-cyan);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    .gps-box h2 i { color: var(--canadian-red); }
     .gps-box p.sub {
       color: var(--text-dim);
-      margin-bottom: 16px;
-      font-size: 0.88rem;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
     }
     .gps-form {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
-    @media (min-width: 480px) {
+    @media (min-width: 520px) {
       .gps-form { flex-direction: row; }
     }
     .gps-form input {
       flex: 1;
       width: 100%;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 2px solid var(--glass-border);
-      border-radius: 10px;
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
       font-size: 16px;
       color: white;
-      min-height: 48px;
+      min-height: 50px;
     }
-    .gps-form input:focus { outline: none; border-color: var(--neon-cyan); }
+    .gps-form input:focus { outline: none; border-color: var(--canadian-red); box-shadow: 0 0 0 3px var(--canadian-red-glow); }
+    
     .btn {
-      background: linear-gradient(135deg, var(--neon-cyan), #00a8ff);
-      color: #030712;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
+      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 22px;
+      border-radius: 12px;
       font-weight: 700;
       cursor: pointer;
-      font-size: 0.9rem;
-      font-family: 'Orbitron', sans-serif;
-      transition: all 0.2s;
-      min-height: 48px;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      transition: all 0.25s ease;
+      min-height: 50px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
+      box-shadow: var(--shadow-red);
     }
-    .btn:hover { box-shadow: 0 0 15px var(--neon-cyan); opacity: 0.95; }
-    .btn.secondary { background: linear-gradient(135deg, var(--neon-magenta), #9b00e8); color: white; }
-    .btn.secondary:hover { box-shadow: 0 0 15px var(--neon-magenta); }
-    .btn.outline { background: transparent; border: 2px solid var(--neon-cyan); color: var(--neon-cyan); }
-    .btn.outline:hover { background: var(--neon-cyan); color: #030712; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(216, 0, 39, 0.4); }
+    .btn.secondary { background: linear-gradient(135deg, #2563EB, #1D4ED8); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3); }
+    .btn.secondary:hover { box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5); }
+    .btn.outline { background: transparent; border: 1px solid var(--canadian-red); color: #fff; box-shadow: none; }
+    .btn.outline:hover { background: var(--canadian-red); }
 
     .loading {
       text-align: center;
-      padding: 24px;
+      padding: 28px;
       color: var(--text-dim);
     }
     .spinner {
-      width: 36px; height: 36px;
+      width: 40px; height: 40px;
       border: 3px solid rgba(255,255,255,0.1);
-      border-top-color: var(--neon-cyan);
+      border-top-color: var(--canadian-red);
       border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      margin: 0 auto 10px;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 12px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .disclaimer {
-      background: rgba(251, 191, 36, 0.08);
-      border-left: 4px solid var(--gold);
-      padding: 10px 14px;
-      border-radius: 0 8px 8px 0;
-      font-size: 0.8rem;
-      margin-top: 12px;
-      color: #fde68a;
+      background: rgba(255, 183, 3, 0.08);
+      border-left: 4px solid var(--maple-gold);
+      padding: 12px 16px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.82rem;
+      margin-top: 14px;
+      color: #FDE68A;
     }
 
     /* Thumb Tab (2028 Edition) */
     .thumb-box {
       background: var(--bg-panel);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
+      border-top: 3px solid var(--maple-gold);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 20px;
+      padding: 24px;
       max-width: 100%;
       margin: 0 auto;
     }
-    .thumb-box h2 { font-family: 'Cinzel', serif; color: var(--neon-magenta); margin-bottom: 6px; font-size: 1.35rem; }
+    .thumb-box h2 { font-family: 'Cinzel', serif; color: #fff; margin-bottom: 8px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+    .thumb-box h2 i { color: var(--maple-gold); }
     .thumb-actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin: 16px 0;
+      gap: 12px;
+      margin: 20px 0;
     }
-    @media (min-width: 480px) {
+    @media (min-width: 520px) {
       .thumb-actions { flex-direction: row; flex-wrap: wrap; }
     }
     .thumb-status {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-dim);
-      margin-top: 10px;
+      margin-top: 12px;
     }
     textarea.thumb-preview {
       width: 100%;
-      height: 160px;
-      font-family: ui-monospace, monospace;
-      font-size: 0.75rem;
-      padding: 12px;
-      background: rgba(0, 0, 0, 0.4);
+      height: 180px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.5);
       border: 1px solid var(--glass-border);
-      border-radius: 10px;
-      color: var(--neon-cyan);
+      border-radius: 12px;
+      color: #A7F3D0;
       resize: vertical;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     .empty {
       text-align: center;
-      padding: 40px 16px;
+      padding: 50px 20px;
       color: var(--text-dim);
     }
-    .empty i { font-size: 2.5rem; color: var(--neon-cyan); opacity: 0.4; margin-bottom: 12px; display: block; }
+    .empty i { font-size: 3rem; color: var(--canadian-red); opacity: 0.6; margin-bottom: 14px; display: block; }
 
     footer {
       text-align: center;
-      padding: 24px 16px;
-      font-size: 0.75rem;
-      color: var(--text-dim);
+      padding: 28px 20px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
       border-top: 1px solid var(--glass-border);
-      margin-top: 30px;
+      margin-top: 40px;
+      background: rgba(4, 6, 10, 0.8);
     }
   </style>
 </head>
@@ -523,15 +597,15 @@
         <div class="logo">
           <div class="logo-icon">401</div>
           <div>
-            <h1>Route401</h1>
-            <span>Global &amp; Canadian Matrix v5.0</span>
+            <h1>Route401 <span class="maple-leaf">🍁</span></h1>
+            <span class="subtag">Global &amp; Canadian Matrix v5.0</span>
           </div>
         </div>
         <nav>
           <button class="active" data-panel="database"><i class="fa-solid fa-earth-americas"></i> Database</button>
-          <button data-panel="remember"><i class="fa-solid fa-bookmark"></i> Remember (2028)</button>
+          <button data-panel="remember"><i class="fa-solid fa-map-pin"></i> Saved (2028)</button>
           <button data-panel="gps"><i class="fa-solid fa-satellite-dish"></i> GPSRouter v3</button>
-          <button data-panel="thumb"><i class="fa-solid fa-microchip"></i> Thumb Tab</button>
+          <button data-panel="thumb"><i class="fa-solid fa-floppy-disk"></i> Portable Tab</button>
         </nav>
       </div>
     </header>
@@ -579,7 +653,7 @@
         <div class="stats-bar" id="rememberStatsBar"></div>
         <div class="grid" id="rememberGrid"></div>
         <div class="empty" id="rememberEmpty" style="display:none;">
-          <i><i class="fa-regular fa-map"></i></i>
+          <i><i class="fa-solid fa-map-location-dot"></i></i>
           <p>No remembered places yet. Click the 🍁 icon on any city card to save it with 2028 notes and folders.</p>
         </div>
       </section>
@@ -587,7 +661,7 @@
       <!-- GPSROUTER V3 -->
       <section id="gps" class="panel">
         <div class="gps-box">
-          <h2>GPSRouter v3 (Advanced Global Modeling)</h2>
+          <h2><i class="fa-solid fa-compass"></i> GPSRouter v3 (Advanced Global Modeling)</h2>
           <p class="sub">Enter any town, hamlet, or world metropolis — even unlisted. GPSRouter v3 instantly calculates an advanced econometric profile with regional GDP parity, trade indexes, and 2028 socio-economic projections.</p>
           <div class="gps-form">
             <input type="text" id="gpsInput" placeholder="e.g. Stratford, Reykjavik, Kyoto, Tofino…" list="citySuggestions" />
@@ -601,8 +675,8 @@
       <!-- PORTABLE THUMB TAB (2028 EDITION) -->
       <section id="thumb" class="panel">
         <div class="thumb-box">
-          <h2>Portable Thumb Tab (2028 Edition)</h2>
-          <p style="color:var(--text-dim); margin-bottom:0.5rem; font-size: 0.85rem;">Export your remembered 2028 places and custom GPS models as a secure portable JSON thumb file, or import state across devices.</p>
+          <h2><i class="fa-solid fa-microchip"></i> Portable Thumb Tab (2028 Edition)</h2>
+          <p style="color:var(--text-dim); margin-bottom:0.5rem; font-size: 0.88rem;">Export your remembered 2028 places and custom GPS models as a secure portable JSON thumb file, or import state across devices.</p>
           <div class="thumb-actions">
             <button class="btn" id="exportThumb"><i class="fa-solid fa-download"></i> Export (.json)</button>
             <button class="btn secondary" id="importThumbBtn"><i class="fa-solid fa-upload"></i> Import File</button>
@@ -676,29 +750,29 @@
       // --- 25 NEW CANADIAN LOCATIONS ADDED FOR THE EXPANSION ---
       { name: "Stratford", province: "Ontario", country: "Canada", population: 33232, density: 1195, employers: "Stratford Festival, Festival Hydro, Framingham, public education", industries: "Performing Arts, Tourism, Manufacturing, Agriculture", hdi: 0.91, crime: 44.1, gdpPerCapita: "$64,000", totalGdpNum: 2.1, totalGdp: "$2.1B", economy: "World-renowned cultural destination famous for its annual Shakespearean festival.", jobMarket: "Strong hospitality, culinary arts, tourism, and light manufacturing.", importance: "Cultural jewel of southwestern Ontario and arts tourism powerhouse." },
       { name: "Collingwood", province: "Ontario", country: "Canada", population: 24738, density: 730, employers: "Blue Mountain Resort, Collingwood General Hospital, Goody's, municipal sector", industries: "All-Season Tourism, Outdoor Recreation, Healthcare, Construction", hdi: 0.92, crime: 49.3, gdpPerCapita: "$66,000", totalGdpNum: 1.6, totalGdp: "$1.6B", economy: "Premier four-season resort and outdoor recreation hub on Georgian Bay.", jobMarket: "Tourism management, hospitality, construction, and healthcare services.", importance: "Gateway to Ontario's ski and waterfront recreation economy." },
-      { name: "Sault Ste. Marie", province: "Ontario", country: "Canada", population: 72051, density: 326, employers: "Algoma Steel, Sault Area Hospital, Sault College, Tenaris", industries: "Steel Manufacturing, Forestry, Healthcare, Border Services", hdi: 0.89, crime: 89.4, gdpPerCapita: "$59,000", totalGdpNum: 4.3, totalGdpNum: 4.3, totalGdp: "$4.3B", economy: "Major industrial city on the St. Marys River with historic steel production.", jobMarket: "Heavy industry, public health, and cross-border trade administration.", importance: "Strategic international border crossing and northern industrial hub." },
+      { name: "Sault Ste. Marie", province: "Ontario", country: "Canada", population: 72051, density: 326, employers: "Algoma Steel, Sault Area Hospital, Sault College, Tenaris", industries: "Steel Manufacturing, Forestry, Healthcare, Border Services", hdi: 0.89, crime: 89.4, gdpPerCapita: "$59,000", totalGdpNum: 4.3, totalGdp: "$4.3B", economy: "Major industrial city on the St. Marys River with historic steel production.", jobMarket: "Heavy industry, public health, and cross-border trade administration.", importance: "Strategic international border crossing and northern industrial hub." },
       { name: "Canmore", province: "Alberta", country: "Canada", population: 15990, density: 228, employers: "Town of Canmore, Banff/Canmore hospitality, arts & outdoor guide services", industries: "Mountain Tourism, Real Estate, Outdoor Recreation, Film Production", hdi: 0.94, crime: 41.0, gdpPerCapita: "$79,000", totalGdpNum: 1.3, totalGdp: "$1.3B", economy: "High-end mountain resort community just outside Banff National Park.", jobMarket: "Hospitality, alpine recreation guiding, construction, and remote corporate tech.", importance: "Gateway to the Canadian Rockies and elite lifestyle destination." },
       { name: "Banff", province: "Alberta", country: "Canada", population: 8305, density: 2110, employers: "Parks Canada, Fairmont Banff Springs, Banff Centre for Arts and Creativity", industries: "Eco-Tourism, Hospitality, Arts & Culture, Conservation", hdi: 0.94, crime: 55.0, gdpPerCapita: "$74,000", totalGdpNum: 0.6, totalGdp: "$0.6B", economy: "Iconic alpine resort town situated entirely within a national park.", jobMarket: "Intense seasonal and year-round hospitality, parks management, and arts administration.", importance: "Canada's premier national park tourism sanctuary and global landmark." },
       { name: "Tofino", province: "British Columbia", country: "Canada", population: 2505, density: 24, employers: "Wickaninnish Inn, Pacific Rim National Park, surf schools, eco-lodges", industries: "Eco-Tourism, Commercial Fishing, Surfing & Marine Recreation", hdi: 0.92, crime: 38.0, gdpPerCapita: "$62,000", totalGdpNum: 0.2, totalGdp: "$0.2B", economy: "World-famous surf and storm-watching capital on the rugged west coast of Vancouver Island.", jobMarket: "Hospitality, marine ecotourism, culinary arts, and commercial fishing.", importance: "International eco-tourism hotspot and Pacific wilderness sanctuary." },
       { name: "Whistler", province: "British Columbia", country: "Canada", population: 13982, density: 58, employers: "Whistler Blackcomb (Vail Resorts), Fairmont Chateau Whistler, municipal government", industries: "Alpine Tourism, Ski Resort Operations, Real Estate, Hospitality", hdi: 0.95, crime: 46.0, gdpPerCapita: "$84,000", totalGdpNum: 1.2, totalGdp: "$1.2B", economy: "North America's premier alpine ski resort and Olympic co-host destination.", jobMarket: "Year-round resort management, hospitality, recreation instruction, and retail.", importance: "World-class winter sports capital and international resort benchmark." },
-      { name: "Nelson", province: "British Columbia", country: "Canada", population: 11106, density: 953, employers: "Kootenay Lake school district, regional hospital, tech start-ups, artisan guilds", industries: "Arts & Culture, Tech, Forestry, Eco-Tourism", hdi: 0.91, crime: 62.0, gdpPerCapita: "$57,000", totalGdpNum: 0.6, totalGdpNum: "$0.6B", economy: "Historic heritage city in the Kootenays known for arts, counter-culture, and tech.", jobMarket: "Remote tech consulting, artisan retail, education, and regional healthcare.", importance: "Cultural and commercial heartbeat of the West Kootenay region." },
-      { name: "Revelstoke", province: "British Columbia", country: "Canada", population: 8275, density: 26, employers: "Revelstoke Mountain Resort, CP Rail, BC Hydro, Parks Canada", industries: "Ski Tourism, Railway Logistics, Hydro Power, Forestry", hdi: 0.91, crime: 51.0, gdpPerCapita: "$69,000", totalGdpNum: 0.6, totalGdpNum: "$0.6B", economy: "Legendary powder-skiing mecca and historic Canadian Pacific railway town.", jobMarket: "Mountain tourism, rail transport, clean energy engineering, and forestry.", importance: "Major interior mountain crossroad and booming winter sports destination." },
-      { name: "St. Andrews", province: "New Brunswick", country: "Canada", population: 1759, density: 215, employers: "Huntsman Marine Science Centre, Algonquin Resort, federal fisheries labs", industries: "Marine Research, Historic Tourism, Aquaculture, Hospitality", hdi: 0.90, crime: 32.0, gdpPerCapita: "$56,000", totalGdpNum: 0.1, totalGdpNum: "$0.1B", economy: "Picturesque seaside resort town renowned for marine research and Victorian architecture.", jobMarket: "Marine biology research, high-end hospitality, and heritage tourism.", importance: "Historic Bay of Fundy research and resort haven." },
-      { name: "Lunenburg", province: "New Brunswick", province: "Nova Scotia", country: "Canada", population: 2313, density: 560, employers: "Lunenburg Shipyard, Fisheries Museum of the Atlantic, tourism operators", industries: "Shipbuilding, UNESCO Heritage Tourism, Commercial Fishing", hdi: 0.90, crime: 35.0, gdpPerCapita: "$58,000", totalGdpNum: 0.2, totalGdpNum: "$0.2B", economy: "UNESCO World Heritage site famous for colorful colonial architecture and the Bluenose.", jobMarket: "Maritime trades, wooden boat building, historical tourism, and fisheries.", importance: "Iconic maritime heritage port of Nova Scotia." },
-      { name: "Mont-Tremblant", province: "Quebec", country: "Canada", population: 10992, density: 47, employers: "Station Mont Tremblant (Intrawest), hospitality, regional services", industries: "All-Season Resort Tourism, Outdoor Recreation, Hospitality", hdi: 0.91, crime: 42.0, gdpPerCapita: "$65,000", totalGdpNum: 0.7, totalGdpNum: "$0.7B", economy: "Premier Laurentian resort village offering world-class skiing and golf.", jobMarket: "Bilingual hospitality, resort operations, and outdoor adventure guiding.", importance: "Eastern Canada's preeminent multi-season mountain resort." },
-      { name: "Olds", province: "Alberta", country: "Canada", population: 9355, density: 978, employers: "Olds College of Agriculture & Technology, regional healthcare, retail", industries: "Agri-Tech, Higher Education, Smart-City Tech, Agriculture", hdi: 0.90, crime: 58.0, gdpPerCapita: "$68,000", totalGdpNum: 0.6, totalGdpNum: "$0.6B", economy: "Innovative central Alberta town famous for agricultural tech and fiber-optic networks.", jobMarket: "Agri-tech research, higher education, and regional commerce.", importance: "Pioneering smart-town and agricultural innovation center." },
-      { name: "Winkler", province: "Manitoba", country: "Canada", population: 13745, density: 665, employers: "Triple E RV, Kroeker Farms, Meridian Manufacturing, retail", industrious: "RV Manufacturing, Agricultural Processing, Construction", hdi: 0.89, crime: 43.0, gdpPerCapita: "$64,000", totalGdpNum: 0.9, totalGdpNum: "$0.9B", economy: "Thriving manufacturing and agricultural hub in southern Manitoba.", jobMarket: "Specialized vehicle manufacturing, agricultural packaging, and trades.", importance: "Economic powerhouse of the Pembina Valley region." },
-      { name: "Dauphin", province: "Manitoba", country: "Canada", population: 8368, density: 665, employers: "Mountain View School Division, regional hospital, agriculture", industries: "Agriculture, Regional Services, Healthcare, Forestry Support", hdi: 0.88, crime: 78.0, gdpPerCapita: "$52,000", totalGdpNum: 0.4, totalGdpNum: "$0.4B", economy: "Service and cultural capital situated between Riding Mountain National Park and Lake Winnipegosis.", jobMarket: "Public healthcare, education, retail, and agricultural support.", importance: "Key Parkland region commercial and administrative center." },
-      { name: "Estevan", province: "Saskatchewan", country: "Canada", population: 10892, density: 531, employers: "Boundary Dam Power Station, oilfield services, agricultural trade", industries: "Coal & Gas Energy, Carbon Capture (CCS), Agriculture", hdi: 0.90, crime: 91.0, gdpPerCapita: "$81,000", totalGdpNum: 0.9, totalGdpNum: "$0.9B", economy: "The Energy City; cornerstone of southeast Saskatchewan power generation and carbon capture.", jobMarket: "Energy engineering, carbon capture tech, oilfield services, and trades.", importance: "Critical southeastern energy and power generation anchor." },
-      { name: "Dieppe", province: "New Brunswick", country: "Canada", population: 28114, density: 382, employers: "Greater Moncton Airport, corporate retail, bilingual tech services", industries: "Aerospace Logistics, Retail, Bilingual Professional Services", hdi: 0.91, crime: 52.0, gdpPerCapita: "$63,000", totalGdpNum: 1.8, totalGdpNum: "$1.8B", economy: "Rapidly expanding bilingual urban center adjacent to Moncton with strong commercial parks.", jobMarket: "Logistics, aviation, bilingual customer success, and retail distribution.", importance: "Fast-growing economic hub in Atlantic Canada." },
-      { name: "Gander", province: "Newfoundland and Labrador", country: "Canada", population: 11693, density: 105, employers: "Gander International Airport, NAV CANADA, regional health, aerospace", industries: "Aviation Logistics, Air Traffic Control, Aerospace, Public Services", hdi: 0.90, crime: 55.0, gdpPerCapita: "$67,000", totalGdpNum: 0.8, totalGdpNum: "$0.8B", economy: "Famed trans-Atlantic aviation refueling crossroads and heart-warming hospitality town.", jobMarket: "Aviation maintenance, air traffic control, aerospace tech, and hospitality.", importance: "Historic global aviation crossroad made legendary on 9/11." },
-      { name: "Edmundston", province: "New Brunswick", country: "Canada", population: 165805, population: 16533, density: 156, employers: "Twin Rivers Paper, Université de Moncton campus, regional hospital", industries: "Pulp & Paper Forestry, Hydro Energy, Bilingual Public Services", hdi: 0.89, crime: 58.0, gdpPerCapita: "$55,000", totalGdpNum: 0.9, totalGdpNum: "$0.9B", economy: "Bilingual industrial gateway city in northwest New Brunswick along the Saint John River.", jobMarket: "Forest products, hydro-electric maintenance, and regional healthcare.", importance: "Strategic trade and forestry capital of northwestern New Brunswick." },
-      { name: "Port Alberni", province: "British Columbia", country: "Canada", population: 18259, density: 92, employers: "Western Forest Products, Catalyst Paper, regional hospital, aquaculture", industries: "Forestry & Pulp, Salmon Aquaculture, Marine Tourism", hdi: 0.89, crime: 96.0, gdpPerCapita: "$56,000", totalGdpNum: 1.0, totalGdpNum: "$1.0B", economy: "Deep-water inlet port city on Vancouver Island with deep forestry roots.", jobMarket: "Timber processing, commercial marine trades, and public services.", importance: "Central Vancouver Island marine and forest products hub." },
-      { name: "Brooks", province: "Alberta", country: "Canada", population: 14976, density: 852, employers: "JBS Canada (beef processing), greenhouse agriculture, irrigation district", industries: "Meat Processing, Intensive Agriculture, Energy Services", hdi: 0.88, crime: 88.0, gdpPerCapita: "$71,000", totalGdpNum: 1.1, totalGdpNum: "$1.1B", economy: "Diverse multicultural agri-food hub anchored by one of Canada's largest beef plants.", jobMarket: "Food processing, intensive agriculture, and energy sector services.", importance: "Southern Alberta processing and multicultural powerhouse." },
-      { name: "Wetaskiwin", province: "Alberta", country: "Canada", population: 12594, density: 671, employers: "Reynolds-Alberta Museum, county administration, oilfield services", industries: "Agriculture, Oil & Gas Services, Heritage Tourism, Retail", hdi: 0.89, crime: 102.0, gdpPerCapita: "$67,000", totalGdpNum: 0.8, totalGdpNum: "$0.8B", economy: "Historic car-themed and agricultural hub south of Edmonton.", jobMarket: "Oilfield services, agricultural trade, and municipal administration.", importance: "Key central Alberta highway crossroad and manufacturing town." },
-      { name: "Oromocto", province: "New Brunswick", country: "Canada", population: 9223, density: 412, employers: "CFB Gagetown (Department of National Defence), municipal services", industries: "Military Defence, Public Administration, Federal Services", hdi: 0.91, crime: 48.0, gdpPerCapita: "$66,000", totalGdpNum: 0.6, totalGdpNum: "$0.6B", economy: "Military-centric town adjacent to Canada's largest army base, CFB Gagetown.", jobMarket: "Defence contracting, military personnel support, and federal administration.", importance: "Vital military and national defence community in Atlantic Canada." },
-      { name: "Amherst", province: "Nova Scotia", country: "Canada", population: 9404, density: 780, employers: "Maritime冈 Manufacturing, provincial logistics, regional healthcare", industries: "Light Manufacturing, Logistics & Distribution, Agriculture", hdi: 0.89, crime: 69.0, gdpPerCapita: "$55,000", totalGdpNum: 0.5, totalGdpNum: "$0.5B", economy: "Strategic industrial gateway town at the border of New Brunswick and Nova Scotia.", jobMarket: "Manufacturing, trucking logistics, and regional distribution.", importance: "Maritime inter-provincial gateway and logistics hub." },
-      { name: "Kentville", province: "Nova Scotia", country: "Canada", population: 6630, density: 382, employers: "Valley Regional Hospital, Acadia University proximity, agriculture HQs", industries: "Agri-Food Research, Healthcare, Apple Orchard Commerce", hdi: 0.91, crime: 51.0, gdpPerCapita: "$59,000", totalGdpNum: 0.4, totalGdpNum: "$0.4B", economy: "Administrative and commercial heart of the fertile Annapolis Valley.", jobMarket: "Healthcare administration, agricultural research, and financial services.", importance: "Agricultural capital of the Annapolis Valley." },
+      { name: "Nelson", province: "British Columbia", country: "Canada", population: 11106, density: 953, employers: "Kootenay Lake school district, regional hospital, tech start-ups, artisan guilds", industries: "Arts & Culture, Tech, Forestry, Eco-Tourism", hdi: 0.91, crime: 62.0, gdpPerCapita: "$57,000", totalGdpNum: 0.6, totalGdp: "$0.6B", economy: "Historic heritage city in the Kootenays known for arts, counter-culture, and tech.", jobMarket: "Remote tech consulting, artisan retail, education, and regional healthcare.", importance: "Cultural and commercial heartbeat of the West Kootenay region." },
+      { name: "Revelstoke", province: "British Columbia", country: "Canada", population: 8275, density: 26, employers: "Revelstoke Mountain Resort, CP Rail, BC Hydro, Parks Canada", industries: "Ski Tourism, Railway Logistics, Hydro Power, Forestry", hdi: 0.91, crime: 51.0, gdpPerCapita: "$69,000", totalGdpNum: 0.6, totalGdp: "$0.6B", economy: "Legendary powder-skiing mecca and historic Canadian Pacific railway town.", jobMarket: "Mountain tourism, rail transport, clean energy engineering, and forestry.", importance: "Major interior mountain crossroad and booming winter sports destination." },
+      { name: "St. Andrews", province: "New Brunswick", country: "Canada", population: 1759, density: 215, employers: "Huntsman Marine Science Centre, Algonquin Resort, federal fisheries labs", industries: "Marine Research, Historic Tourism, Aquaculture, Hospitality", hdi: 0.90, crime: 32.0, gdpPerCapita: "$56,000", totalGdpNum: 0.1, totalGdp: "$0.1B", economy: "Picturesque seaside resort town renowned for marine research and Victorian architecture.", jobMarket: "Marine biology research, high-end hospitality, and heritage tourism.", importance: "Historic Bay of Fundy research and resort haven." },
+      { name: "Lunenburg", province: "Nova Scotia", country: "Canada", population: 2313, density: 560, employers: "Lunenburg Shipyard, Fisheries Museum of the Atlantic, tourism operators", industries: "Shipbuilding, UNESCO Heritage Tourism, Commercial Fishing", hdi: 0.90, crime: 35.0, gdpPerCapita: "$58,000", totalGdpNum: 0.2, totalGdp: "$0.2B", economy: "UNESCO World Heritage site famous for colorful colonial architecture and the Bluenose.", jobMarket: "Maritime trades, wooden boat building, historical tourism, and fisheries.", importance: "Iconic maritime heritage port of Nova Scotia." },
+      { name: "Mont-Tremblant", province: "Quebec", country: "Canada", population: 10992, density: 47, employers: "Station Mont Tremblant (Intrawest), hospitality, regional services", industries: "All-Season Resort Tourism, Outdoor Recreation, Hospitality", hdi: 0.91, crime: 42.0, gdpPerCapita: "$65,000", totalGdpNum: 0.7, totalGdp: "$0.7B", economy: "Premier Laurentian resort village offering world-class skiing and golf.", jobMarket: "Bilingual hospitality, resort operations, and outdoor adventure guiding.", importance: "Eastern Canada's preeminent multi-season mountain resort." },
+      { name: "Olds", province: "Alberta", country: "Canada", population: 9355, density: 978, employers: "Olds College of Agriculture & Technology, regional healthcare, retail", industries: "Agri-Tech, Higher Education, Smart-City Tech, Agriculture", hdi: 0.90, crime: 58.0, gdpPerCapita: "$68,000", totalGdpNum: 0.6, totalGdp: "$0.6B", economy: "Innovative central Alberta town famous for agricultural tech and fiber-optic networks.", jobMarket: "Agri-tech research, higher education, and regional commerce.", importance: "Pioneering smart-town and agricultural innovation center." },
+      { name: "Winkler", province: "Manitoba", country: "Canada", population: 13745, density: 665, employers: "Triple E RV, Kroeker Farms, Meridian Manufacturing, retail", industries: "RV Manufacturing, Agricultural Processing, Construction", hdi: 0.89, crime: 43.0, gdpPerCapita: "$64,000", totalGdpNum: 0.9, totalGdp: "$0.9B", economy: "Thriving manufacturing and agricultural hub in southern Manitoba.", jobMarket: "Specialized vehicle manufacturing, agricultural packaging, and trades.", importance: "Economic powerhouse of the Pembina Valley region." },
+      { name: "Dauphin", province: "Manitoba", country: "Canada", population: 8368, density: 665, employers: "Mountain View School Division, regional hospital, agriculture", industries: "Agriculture, Regional Services, Healthcare, Forestry Support", hdi: 0.88, crime: 78.0, gdpPerCapita: "$52,000", totalGdpNum: 0.4, totalGdp: "$0.4B", economy: "Service and cultural capital situated between Riding Mountain National Park and Lake Winnipegosis.", jobMarket: "Public healthcare, education, retail, and agricultural support.", importance: "Key Parkland region commercial and administrative center." },
+      { name: "Estevan", province: "Saskatchewan", country: "Canada", population: 10892, density: 531, employers: "Boundary Dam Power Station, oilfield services, agricultural trade", industries: "Coal & Gas Energy, Carbon Capture (CCS), Agriculture", hdi: 0.90, crime: 91.0, gdpPerCapita: "$81,000", totalGdpNum: 0.9, totalGdp: "$0.9B", economy: "The Energy City; cornerstone of southeast Saskatchewan power generation and carbon capture.", jobMarket: "Energy engineering, carbon capture tech, oilfield services, and trades.", importance: "Critical southeastern energy and power generation anchor." },
+      { name: "Dieppe", province: "New Brunswick", country: "Canada", population: 28114, density: 382, employers: "Greater Moncton Airport, corporate retail, bilingual tech services", industries: "Aerospace Logistics, Retail, Bilingual Professional Services", hdi: 0.91, crime: 52.0, gdpPerCapita: "$63,000", totalGdpNum: 1.8, totalGdp: "$1.8B", economy: "Rapidly expanding bilingual urban center adjacent to Moncton with strong commercial parks.", jobMarket: "Logistics, aviation, bilingual customer success, and retail distribution.", importance: "Fast-growing economic hub in Atlantic Canada." },
+      { name: "Gander", province: "Newfoundland and Labrador", country: "Canada", population: 11693, density: 105, employers: "Gander International Airport, NAV CANADA, regional health, aerospace", industries: "Aviation Logistics, Air Traffic Control, Aerospace, Public Services", hdi: 0.90, crime: 55.0, gdpPerCapita: "$67,000", totalGdpNum: 0.8, totalGdp: "$0.8B", economy: "Famed trans-Atlantic aviation refueling crossroads and heart-warming hospitality town.", jobMarket: "Aviation maintenance, air traffic control, aerospace tech, and hospitality.", importance: "Historic global aviation crossroad made legendary on 9/11." },
+      { name: "Edmundston", province: "New Brunswick", country: "Canada", population: 16533, density: 156, employers: "Twin Rivers Paper, Université de Moncton campus, regional hospital", industries: "Pulp & Paper Forestry, Hydro Energy, Bilingual Public Services", hdi: 0.89, crime: 58.0, gdpPerCapita: "$55,000", totalGdpNum: 0.9, totalGdp: "$0.9B", economy: "Bilingual industrial gateway city in northwest New Brunswick along the Saint John River.", jobMarket: "Forest products, hydro-electric maintenance, and regional healthcare.", importance: "Strategic trade and forestry capital of northwestern New Brunswick." },
+      { name: "Port Alberni", province: "British Columbia", country: "Canada", population: 18259, density: 92, employers: "Western Forest Products, Catalyst Paper, regional hospital, aquaculture", industries: "Forestry & Pulp, Salmon Aquaculture, Marine Tourism", hdi: 0.89, crime: 96.0, gdpPerCapita: "$56,000", totalGdpNum: 1.0, totalGdp: "$1.0B", economy: "Deep-water inlet port city on Vancouver Island with deep forestry roots.", jobMarket: "Timber processing, commercial marine trades, and public services.", importance: "Central Vancouver Island marine and forest products hub." },
+      { name: "Brooks", province: "Alberta", country: "Canada", population: 14976, density: 852, employers: "JBS Canada (beef processing), greenhouse agriculture, irrigation district", industries: "Meat Processing, Intensive Agriculture, Energy Services", hdi: 0.88, crime: 88.0, gdpPerCapita: "$71,000", totalGdpNum: 1.1, totalGdp: "$1.1B", economy: "Diverse multicultural agri-food hub anchored by one of Canada's largest beef plants.", jobMarket: "Food processing, intensive agriculture, and energy sector services.", importance: "Southern Alberta processing and multicultural powerhouse." },
+      { name: "Wetaskiwin", province: "Alberta", country: "Canada", population: 12594, density: 671, employers: "Reynolds-Alberta Museum, county administration, oilfield services", industries: "Agriculture, Oil & Gas Services, Heritage Tourism, Retail", hdi: 0.89, crime: 102.0, gdpPerCapita: "$67,000", totalGdpNum: 0.8, totalGdp: "$0.8B", economy: "Historic car-themed and agricultural hub south of Edmonton.", jobMarket: "Oilfield services, agricultural trade, and municipal administration.", importance: "Key central Alberta highway crossroad and manufacturing town." },
+      { name: "Oromocto", province: "New Brunswick", country: "Canada", population: 9223, density: 412, employers: "CFB Gagetown (Department of National Defence), municipal services", industries: "Military Defence, Public Administration, Federal Services", hdi: 0.91, crime: 48.0, gdpPerCapita: "$66,000", totalGdpNum: 0.6, totalGdp: "$0.6B", economy: "Military-centric town adjacent to Canada's largest army base, CFB Gagetown.", jobMarket: "Defence contracting, military personnel support, and federal administration.", importance: "Vital military and national defence community in Atlantic Canada." },
+      { name: "Amherst", province: "Nova Scotia", country: "Canada", population: 9404, density: 780, employers: "Maritime Manufacturing, provincial logistics, regional healthcare", industries: "Light Manufacturing, Logistics & Distribution, Agriculture", hdi: 0.89, crime: 69.0, gdpPerCapita: "$55,000", totalGdpNum: 0.5, totalGdp: "$0.5B", economy: "Strategic industrial gateway town at the border of New Brunswick and Nova Scotia.", jobMarket: "Manufacturing, trucking logistics, and regional distribution.", importance: "Maritime inter-provincial gateway and logistics hub." },
+      { name: "Kentville", province: "Nova Scotia", country: "Canada", population: 6630, density: 382, employers: "Valley Regional Hospital, Acadia University proximity, agriculture HQs", industries: "Agri-Food Research, Healthcare, Apple Orchard Commerce", hdi: 0.91, crime: 51.0, gdpPerCapita: "$59,000", totalGdpNum: 0.4, totalGdp: "$0.4B", economy: "Administrative and commercial heart of the fertile Annapolis Valley.", jobMarket: "Healthcare administration, agricultural research, and financial services.", importance: "Agricultural capital of the Annapolis Valley." },
 
       // --- 25 INTERNATIONAL GLOBAL CITIES ADDED FOR "THE EXPANSION INTO THE WORLD" ---
       { name: "Tokyo", province: "Kanto", country: "Japan", population: 14040000, density: 6400, employers: "Sony, Toyota, Mitsubishi, SoftBank, Tokyo Stock Exchange", industries: "Tech, Finance, Robotics, Electronics, Automotive", hdi: 0.96, crime: 14.2, gdpPerCapita: "$52,000", totalGdpNum: 1680.0, totalGdp: "$1.68 Trillion", economy: "World's most populous metropolitan economy; global beacon of high-tech and finance.", jobMarket: "Massive demand in software engineering, robotics, corporate finance, and electronics.", importance: "Global Alpha++ metropolis and economic heartbeat of East Asia." },
@@ -708,24 +782,24 @@
       { name: "Berlin", province: "Berlin", country: "Germany", population: 3850809, density: 4311, employers: "Tesla Berlin, Siemens, Zalando, Charité, Government", industries: "Tech Startups, Public Administration, Biotech, Creative Industries", hdi: 0.94, crime: 73.5, gdpPerCapita: "$54,000", totalGdpNum: 210.0, totalGdp: "$210B", economy: "Vibrant European startup and political capital renowned for deep-tech and culture.", jobMarket: "Software development, renewable energy engineering, and digital media.", importance: "Political and innovative capital of Germany and the EU." },
       { name: "Singapore", province: "Singapore", country: "Singapore", population: 5454000, density: 8358, employers: "DBS Bank, Singapore Airlines, Grab, Temasek, Changi Airport", industries: "Maritime Trade, FinTech, Petroleum Refining, Biotech", hdi: 0.94, crime: 15.1, gdpPerCapita: "$82,800", totalGdpNum: 469.0, totalGdp: "$469B", economy: "Global commercial and maritime tiger economy with elite financial infrastructure.", jobMarket: "Banking, supply chain logistics, marine engineering, and data science.", importance: "Strategic financial gateway of Southeast Asia." },
       { name: "Sydney", province: "New South Wales", country: "Australia", population: 5312000, density: 430, employers: "Commonwealth Bank, Macquarie Group, Qantas, Telstra", industries: "Finance, Tourism, Professional Services, Tech", hdi: 0.95, crime: 41.2, gdpPerCapita: "$71,000", totalGdpNum: 540.0, totalGdp: "$540B", economy: "Australia's premier financial and commercial powerhouse on the Pacific Rim.", jobMarket: "Banking, mining corporate HQs, tourism management, and IT consulting.", importance: "Economic and cultural anchor of Australia." },
-      { name: "Zurich", province: "Zurich", country: "Switzerland", population: 443037, density: 5028, employers: "UBS, Zurich Insurance, Google Zurich, Swiss Re", industries: "Private Banking, Wealth Management, Tech R&D, Pharmaceuticals", hdi: 0.96, crime: 21.0, gdpPerCapita: "$98,000", totalGdpNum: 160.0, totalGdpNum: "$160B", economy: "Global epicenter of banking secrecy, private wealth management, and high-tech research.", jobMarket: "Quantitative finance, advanced software engineering, and biotech.", importance: "Financial capital of Switzerland and European innovation hub." },
+      { name: "Zurich", province: "Zurich", country: "Switzerland", population: 443037, density: 5028, employers: "UBS, Zurich Insurance, Google Zurich, Swiss Re", industries: "Private Banking, Wealth Management, Tech R&D, Pharmaceuticals", hdi: 0.96, crime: 21.0, gdpPerCapita: "$98,000", totalGdpNum: 160.0, totalGdp: "$160B", economy: "Global epicenter of banking secrecy, private wealth management, and high-tech research.", jobMarket: "Quantitative finance, advanced software engineering, and biotech.", importance: "Financial capital of Switzerland and European innovation hub." },
       { name: "Seoul", province: "Seoul Capital", country: "South Korea", population: 9428000, density: 15555, employers: "Samsung, Hyundai, LG, SK Group, Coupang", industries: "Semiconductors, Electronics, K-Culture, AI & Robotics", hdi: 0.93, crime: 28.5, gdpPerCapita: "$48,000", totalGdpNum: 920.0, totalGdp: "$920B", economy: "Ultra-wired technological megalopolis leading the world in memory chips and digital innovation.", jobMarket: "Semiconductor manufacturing, AI development, and digital entertainment.", importance: "Global high-tech manufacturing and cultural superpower capital." },
-      { name: "Dubai", province: "Dubai", country: "United Arab Emirates", population: 3604000, density: 2200, employers: "Emirates Group, DP World, Emaar, Dubai Islamic Bank", industries: "Aviation, Luxury Real Estate, Tourism, FinTech, Trade", hdi: 0.92, crime: 16.3, gdpPerCapita: "$74,000", totalGdpNum: 128.0, totalGdpNum: "$128B", economy: "Middle East's commercial, luxury tourism, and international aviation crossroads.", jobMarket: "Aviation logistics, real estate development, hospitality, and trading.", importance: "The premier global business and transit hub of the Middle East." },
-      { name: "Hong Kong", province: "Hong Kong", country: "China", population: 7413000, density: 6766, employers: "HSBC Hong Kong, Cathay Pacific, CK Hutchison, HKEX", industries: "International Finance, Global Trade, Shipping, Real Estate", hdi: 0.95, crime: 24.1, gdpPerCapita: "$51,000", totalGdpNum: 382.0, totalGdpNum: "$382B", economy: "Global financial bridge connecting mainland China with Western capital markets.", jobMarket: "Investment banking, asset management, maritime logistics, and law.", importance: "Global financial titan and East-West trade portal." },
-      { name: "Amsterdam", province: "North Holland", country: "Netherlands", population: 921402, density: 5357, employers: "ASML proximity, ING Group, Booking.com, Philips, Adyen", industries: "Tech, FinTech, Logistics, Creative Industries, Finance", hdi: 0.94, crime: 45.2, gdpPerCapita: "$62,000", totalGdpNum: 210.0, totalGdpNum: "$210B", economy: "European digital and logistics hub celebrated for openness, tech startups, and trade.", jobMarket: "Software engineering, digital commerce, logistics, and sustainable tech.", importance: "Major innovation capital and digital gateway of Western Europe." },
-      { name: "Reykjavík", province: "Capital Region", country: "Iceland", population: 135321, density: 524, employers: "Marel, Landsvirkjun, Icelandair, municipal administration", industries: "Geothermal Energy, Tech, Fisheries, Eco-Tourism, Software", hdi: 0.96, crime: 23.4, gdpPerCapita: "$77,000", totalGdpNum: 24.0, totalGdpNum: "$24B", economy: "Green energy pioneer powered entirely by geothermal resources; high living standards.", jobMarket: "Renewable energy engineering, green tech software, tourism, and fisheries.", importance: "Capital of Iceland and northernmost capital of the world." },
-      { name: "Dublin", province: "County Dublin", country: "Ireland", population: 1450000, density: 4500, employers: "Google European HQ, Meta, Pfizer, Accenture, Bank of Ireland", industries: "European Tech HQ, Pharmaceuticals, Finance, Software", hdi: 0.95, crime: 51.6, gdpPerCapita: "$99,000", totalGdpNum: 230.0, totalGdpNum: "$230B", economy: "The Silicon Valley of Europe; hosting European headquarters for major global tech giants.", jobMarket: "Cloud computing, biopharmaceuticals, European tax/legal, and digital marketing.", importance: "Primary European tech and knowledge economy gateway." },
-      { name: "Rome", province: "Lazio", country: "Italy", population: 2748109, density: 2132, employers: "ENI, Enel, Leonardo, Vatican City administration, ITA Airways", industries: "Public Administration, Tourism, Aerospace, Energy, Fashion", hdi: 0.91, crime: 53.0, gdpPerCapita: "$45,000", totalGdpNum: 220.0, totalGdpNum: "$220B", economy: "Historic eternal city combining ancient heritage with modern energy and aerospace industries.", jobMarket: "Public administration, international diplomacy, aerospace engineering, and tourism.", importance: "Capital of Italy and global cultural/religious epicenter." },
-      { name: "Vienna", province: "Vienna", country: "Austria", population: 1982097, density: 4778, employers: "OMV Group, Erste Bank, UN Office, Vienna Insurance", industries: "International Diplomacy, Pharmaceuticals, Precision Engineering, Tourism", hdi: 0.92, crime: 32.5, gdpPerCapita: "$59,000", totalGdpNum: 170.0, totalGdpNum: "$170B", economy: "Consistently ranked as the world's most liveable city; diplomatic and cultural anchor.", jobMarket: "International relations, green infrastructure, healthcare, and finance.", importance: "Global diplomatic capital and Central European cultural jewel." },
-      { name: "Stockholm", province: "Stockholm County", country: "Sweden", population: 978770, density: 5300, employers: "Spotify, Ericsson, H&M, Klarna, Atlas Copco", industries: "Tech Unicorns, Telecommunications, Fintech, Green Energy", hdi: 0.95, crime: 47.1, gdpPerCapita: "$62,000", totalGdpNum: 190.0, totalGdpNum: "$190B", economy: "Europe's leading tech startup incubator; birthplace of Spotify, Klarna, and Skype.", jobMarket: "Software engineering, fintech development, sustainable urban planning.", importance: "Scandinavia's premier technological and financial nexus." },
-      { name: "Oslo", province: "Oslo", country: "Norway", population: 709037, density: 1538, employers: "Equinor, Norsk Hydro, DNB Bank, Telenor", industries: "Energy & Petroleum, Maritime Shipping, Tech, Green Transition", hdi: 0.96, crime: 38.2, gdpPerCapita: "$89,000", totalGdpNum: 110.0, totalGdpNum: "$110B", economy: "Wealthy Nordic capital fueled by sovereign wealth management and maritime green tech.", jobMarket: "Renewable energy, petroleum engineering, maritime logistics, and software.", importance: "Capital of Norway and global leader in electric vehicle adoption and green tech." },
-      { name: "Copenhagen", province: "Capital Region", country: "Denmark", population: 644431, density: 7700, employers: "Novo Nordisk, Maersk, Carlsberg, Vestas Wind Systems", industries: "Life Sciences & Biotech, Clean Energy, Maritime Shipping", hdi: 0.95, crime: 34.0, gdpPerCapita: "$68,000", totalGdpNum: 140.0, totalGdpNum: "$140B", economy: "Global leader in green energy technology, pharmaceuticals, and container shipping.", jobMarket: "Biotech research, wind turbine engineering, maritime logistics, and urban design.", importance: "Danish capital and world pioneer in sustainable urban economies." },
-      { name: "Auckland", province: "Auckland", country: "New Zealand", population: 1695000, density: 348, employers: "Air New Zealand, Fisher & Paykel, Spark New Zealand, local government", industries: "Tech, Marine Industries, Tourism, Financial Services", hdi: 0.93, crime: 43.8, gdpPerCapita: "$52,000", totalGdpNum: 115.0, totalGdpNum: "$115B", economy: "New Zealand's largest commercial engine and City of Sails.", jobMarket: "Agri-tech, software development, marine architecture, and tourism.", importance: "New Zealand's primary economic and international gateway." },
-      { name: "São Paulo", province: "São Paulo", country: "Brazil", population: 12396372, density: 7398, employers: "Itaú Unibanco, Petrobras, Embraer, Ambev, B3 Stock Exchange", industries: "Finance, Automotive, Aviation, Manufacturing, Agri-Business", hdi: 0.82, crime: 55.4, gdpPerCapita: "$21,000", totalGdpNum: 680.0, totalGdpNum: "$680B", economy: "Economic powerhouse of Latin America; financial and industrial heart of Brazil.", jobMarket: "Corporate banking, automotive engineering, software, and industrial manufacturing.", importance: "Financial capital of South America and Alpha global city." },
-      { name: "Mexico City", province: "CDMX", country: "Mexico", population: 9209944, density: 6163, employers: "América Móvil, Bimbo, Televisa, BBVA Mexico, Pemex", industries: "Telecommunications, Finance, Manufacturing, Media, Tourism", hdi: 0.83, crime: 64.2, gdpPerCapita: "$19,500", totalGdpNum: 490.0, totalGdpNum: "$490B", economy: "Sprawling North American megalopolis and financial nexus of Mexico.", jobMarket: "Telecommunications, manufacturing corporate management, and software engineering.", importance: "Cultural and economic capital of Spanish-speaking North America." },
-      { name: "Cape Town", province: "Western Cape", country: "South Africa", population: 4771000, density: 1850, employers: "Sanlam, Shoprite, Old Mutual, Discovery Health, tech incubators", industries: "Fintech, Wine & Agriculture, Tourism, Venture Capital", hdi: 0.83, crime: 74.8, gdpPerCapita: "$16,500", totalGdpNum: 110.0, totalGdpNum: "$110B", economy: "South Africa's vibrant tech and venture capital hub nestled in a global tourist paradise.", jobMarket: "Software engineering, fintech, wine export management, and tourism.", importance: "Legislative capital of South Africa and leading African innovation node." },
-      { name: "Mumbai", province: "Maharashtra", country: "India", population: 12478447, density: 21000, employers: "Reliance Industries, Tata Group, Reserve Bank of India, Bollywood", industries: "Finance, Entertainment (Bollywood), IT Services, Pharmaceuticals", hdi: 0.81, crime: 45.0, gdpPerCapita: "$8,500", totalGdpNum: 310.0, totalGdpNum: "$310B", economy: "Financial, commercial, and entertainment capital of India.", jobMarket: "Investment banking, film production, software services, and maritime trade.", importance: "India's financial heartbeat and global entertainment powerhouse." },
-      { name: "Bangkok", province: "Bangkok Metropolis", country: "Thailand", population: 10539000, density: 5300, employers: "CP Group, PTT, Thai Airways, Kasikornbank, tourism sector", industries: "Automotive, Electronics Manufacturing, Tourism, Medical Hub", hdi: 0.82, crime: 41.3, gdpPerCapita: "$17,200", totalGdpNum: 240.0, totalGdpNum: "$240B", economy: "Southeast Asia's premier tourism, automotive manufacturing, and medical tourism center.", jobMarket: "Automotive engineering, medical tourism services, and hospitality management.", importance: "Economic and cultural capital of Thailand and ASEAN hub." }
+      { name: "Dubai", province: "Dubai", country: "United Arab Emirates", population: 3604000, density: 2200, employers: "Emirates Group, DP World, Emaar, Dubai Islamic Bank", industries: "Aviation, Luxury Real Estate, Tourism, FinTech, Trade", hdi: 0.92, crime: 16.3, gdpPerCapita: "$74,000", totalGdpNum: 128.0, totalGdp: "$128B", economy: "Middle East's commercial, luxury tourism, and international aviation crossroads.", jobMarket: "Aviation logistics, real estate development, hospitality, and trading.", importance: "The premier global business and transit hub of the Middle East." },
+      { name: "Hong Kong", province: "Hong Kong", country: "China", population: 7413000, density: 6766, employers: "HSBC Hong Kong, Cathay Pacific, CK Hutchison, HKEX", industries: "International Finance, Global Trade, Shipping, Real Estate", hdi: 0.95, crime: 24.1, gdpPerCapita: "$51,000", totalGdpNum: 382.0, totalGdp: "$382B", economy: "Global financial bridge connecting mainland China with Western capital markets.", jobMarket: "Investment banking, asset management, maritime logistics, and law.", importance: "Global financial titan and East-West trade portal." },
+      { name: "Amsterdam", province: "North Holland", country: "Netherlands", population: 921402, density: 5357, employers: "ASML proximity, ING Group, Booking.com, Philips, Adyen", industries: "Tech, FinTech, Logistics, Creative Industries, Finance", hdi: 0.94, crime: 45.2, gdpPerCapita: "$62,000", totalGdpNum: 210.0, totalGdp: "$210B", economy: "European digital and logistics hub celebrated for openness, tech startups, and trade.", jobMarket: "Software engineering, digital commerce, logistics, and sustainable tech.", importance: "Major innovation capital and digital gateway of Western Europe." },
+      { name: "Reykjavík", province: "Capital Region", country: "Iceland", population: 135321, density: 524, employers: "Marel, Landsvirkjun, Icelandair, municipal administration", industries: "Geothermal Energy, Tech, Fisheries, Eco-Tourism, Software", hdi: 0.96, crime: 23.4, gdpPerCapita: "$77,000", totalGdpNum: 24.0, totalGdp: "$24B", economy: "Green energy pioneer powered entirely by geothermal resources; high living standards.", jobMarket: "Renewable energy engineering, green tech software, tourism, and fisheries.", importance: "Capital of Iceland and northernmost capital of the world." },
+      { name: "Dublin", province: "County Dublin", country: "Ireland", population: 1450000, density: 4500, employers: "Google European HQ, Meta, Pfizer, Accenture, Bank of Ireland", industries: "European Tech HQ, Pharmaceuticals, Finance, Software", hdi: 0.95, crime: 51.6, gdpPerCapita: "$99,000", totalGdpNum: 230.0, totalGdp: "$230B", economy: "The Silicon Valley of Europe; hosting European headquarters for major global tech giants.", jobMarket: "Cloud computing, biopharmaceuticals, European tax/legal, and digital marketing.", importance: "Primary European tech and knowledge economy gateway." },
+      { name: "Rome", province: "Lazio", country: "Italy", population: 2748109, density: 2132, employers: "ENI, Enel, Leonardo, Vatican City administration, ITA Airways", industries: "Public Administration, Tourism, Aerospace, Energy, Fashion", hdi: 0.91, crime: 53.0, gdpPerCapita: "$45,000", totalGdpNum: 220.0, totalGdp: "$220B", economy: "Historic eternal city combining ancient heritage with modern energy and aerospace industries.", jobMarket: "Public administration, international diplomacy, aerospace engineering, and tourism.", importance: "Capital of Italy and global cultural/religious epicenter." },
+      { name: "Vienna", province: "Vienna", country: "Austria", population: 1982097, density: 4778, employers: "OMV Group, Erste Bank, UN Office, Vienna Insurance", industries: "International Diplomacy, Pharmaceuticals, Precision Engineering, Tourism", hdi: 0.92, crime: 32.5, gdpPerCapita: "$59,000", totalGdpNum: 170.0, totalGdp: "$170B", economy: "Consistently ranked as the world's most liveable city; diplomatic and cultural anchor.", jobMarket: "International relations, green infrastructure, healthcare, and finance.", importance: "Global diplomatic capital and Central European cultural jewel." },
+      { name: "Stockholm", province: "Stockholm County", country: "Sweden", population: 978770, density: 5300, employers: "Spotify, Ericsson, H&M, Klarna, Atlas Copco", industries: "Tech Unicorns, Telecommunications, Fintech, Green Energy", hdi: 0.95, crime: 47.1, gdpPerCapita: "$62,000", totalGdpNum: 190.0, totalGdp: "$190B", economy: "Europe's leading tech startup incubator; birthplace of Spotify, Klarna, and Skype.", jobMarket: "Software engineering, fintech development, sustainable urban planning.", importance: "Scandinavia's premier technological and financial nexus." },
+      { name: "Oslo", province: "Oslo", country: "Norway", population: 709037, density: 1538, employers: "Equinor, Norsk Hydro, DNB Bank, Telenor", industries: "Energy & Petroleum, Maritime Shipping, Tech, Green Transition", hdi: 0.96, crime: 38.2, gdpPerCapita: "$89,000", totalGdpNum: 110.0, totalGdp: "$110B", economy: "Wealthy Nordic capital fueled by sovereign wealth management and maritime green tech.", jobMarket: "Renewable energy, petroleum engineering, maritime logistics, and software.", importance: "Capital of Norway and global leader in electric vehicle adoption and green tech." },
+      { name: "Copenhagen", province: "Capital Region", country: "Denmark", population: 644431, density: 7700, employers: "Novo Nordisk, Maersk, Carlsberg, Vestas Wind Systems", industries: "Life Sciences & Biotech, Clean Energy, Maritime Shipping", hdi: 0.95, crime: 34.0, gdpPerCapita: "$68,000", totalGdpNum: 140.0, totalGdp: "$140B", economy: "Global leader in green energy technology, pharmaceuticals, and container shipping.", jobMarket: "Biotech research, wind turbine engineering, maritime logistics, and urban design.", importance: "Danish capital and world pioneer in sustainable urban economies." },
+      { name: "Auckland", province: "Auckland", country: "New Zealand", population: 1695000, density: 348, employers: "Air New Zealand, Fisher & Paykel, Spark New Zealand, local government", industries: "Tech, Marine Industries, Tourism, Financial Services", hdi: 0.93, crime: 43.8, gdpPerCapita: "$52,000", totalGdpNum: 115.0, totalGdp: "$115B", economy: "New Zealand's largest commercial engine and City of Sails.", jobMarket: "Agri-tech, software development, marine architecture, and tourism.", importance: "New Zealand's primary economic and international gateway." },
+      { name: "São Paulo", province: "São Paulo", country: "Brazil", population: 12396372, density: 7398, employers: "Itaú Unibanco, Petrobras, Embraer, Ambev, B3 Stock Exchange", industries: "Finance, Automotive, Aviation, Manufacturing, Agri-Business", hdi: 0.82, crime: 55.4, gdpPerCapita: "$21,000", totalGdpNum: 680.0, totalGdp: "$680B", economy: "Economic powerhouse of Latin America; financial and industrial heart of Brazil.", jobMarket: "Corporate banking, automotive engineering, software, and industrial manufacturing.", importance: "Financial capital of South America and Alpha global city." },
+      { name: "Mexico City", province: "CDMX", country: "Mexico", population: 9209944, density: 6163, employers: "América Móvil, Bimbo, Televisa, BBVA Mexico, Pemex", industries: "Telecommunications, Finance, Manufacturing, Media, Tourism", hdi: 0.83, crime: 64.2, gdpPerCapita: "$19,500", totalGdpNum: 490.0, totalGdp: "$490B", economy: "Sprawling North American megalopolis and financial nexus of Mexico.", jobMarket: "Telecommunications, manufacturing corporate management, and software engineering.", importance: "Cultural and economic capital of Spanish-speaking North America." },
+      { name: "Cape Town", province: "Western Cape", country: "South Africa", population: 4771000, density: 1850, employers: "Sanlam, Shoprite, Old Mutual, Discovery Health, tech incubators", industries: "Fintech, Wine & Agriculture, Tourism, Venture Capital", hdi: 0.83, crime: 74.8, gdpPerCapita: "$16,500", totalGdpNum: 110.0, totalGdp: "$110B", economy: "South Africa's vibrant tech and venture capital hub nestled in a global tourist paradise.", jobMarket: "Software engineering, fintech, wine export management, and tourism.", importance: "Legislative capital of South Africa and leading African innovation node." },
+      { name: "Mumbai", province: "Maharashtra", country: "India", population: 12478447, density: 21000, employers: "Reliance Industries, Tata Group, Reserve Bank of India, Bollywood", industries: "Finance, Entertainment (Bollywood), IT Services, Pharmaceuticals", hdi: 0.81, crime: 45.0, gdpPerCapita: "$8,500", totalGdpNum: 310.0, totalGdp: "$310B", economy: "Financial, commercial, and entertainment capital of India.", jobMarket: "Investment banking, film production, software services, and maritime trade.", importance: "India's financial heartbeat and global entertainment powerhouse." },
+      { name: "Bangkok", province: "Bangkok Metropolis", country: "Thailand", population: 10539000, density: 5300, employers: "CP Group, PTT, Thai Airways, Kasikornbank, tourism sector", industries: "Automotive, Electronics Manufacturing, Tourism, Medical Hub", hdi: 0.82, crime: 41.3, gdpPerCapita: "$17,200", totalGdpNum: 240.0, totalGdp: "$240B", economy: "Southeast Asia's premier tourism, automotive manufacturing, and medical tourism center.", jobMarket: "Automotive engineering, medical tourism services, and hospitality management.", importance: "Economic and cultural capital of Thailand and ASEAN hub." }
     ];
 
     // LocalStorage State (2028 Edition)
@@ -794,7 +868,8 @@
     function cardHTML(c, extraBadge = "") {
       const isRem = rememberedMap[c.name] !== undefined;
       const isGlobal = c.country && c.country !== "Canada";
-      const locationSub = isGlobal ? `${c.province ? c.province + ', ' : ''}${c.country}` : (c.province || 'Canada');
+      const flagIcon = isGlobal ? '🌍 ' : '🇨🇦 ';
+      const locationSub = `${flagIcon}${c.province ? c.province + ', ' : ''}${c.country}`;
       
       return `
         <article class="card" data-name="${c.name}">
@@ -830,7 +905,7 @@
       return `
         <div class="remember-custom-box" onclick="event.stopPropagation()">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-weight:700; font-size:0.75rem; color:var(--neon-cyan); font-family:'Orbitron',sans-serif;">🍁 Saved for 2028 (${data.folder})</span>
+            <span style="font-weight:700; font-size:0.75rem; color:var(--maple-gold); font-family:'JetBrains Mono',monospace;">🍁 Saved for 2028 (${data.folder})</span>
             ${data.bucketList ? '<span class="bucket-badge">2028 Bucket List</span>' : ''}
           </div>
           <div class="custom-row">
@@ -841,11 +916,11 @@
               <option value="Business" ${data.folder==="Business"?"selected":""}>Business</option>
             </select>
             <input type="date" value="${data.reminder || '2028-06-01'}" onchange="updateRememberField('${name}', 'reminder', this.value)" />
-            <label style="font-size:0.7rem; display:flex; align-items:center; gap:3px; cursor:pointer; color:var(--text-main);">
+            <label style="font-size:0.75rem; display:flex; align-items:center; gap:4px; cursor:pointer; color:var(--text-main);">
               <input type="checkbox" ${data.bucketList?"checked":""} onchange="updateRememberField('${name}', 'bucketList', this.checked)" /> List
             </label>
           </div>
-          <input type="text" placeholder="Add 2028 notes or travel plan..." value="${data.note || ''}" style="width:100%; margin-top:6px; padding:6px 10px; font-size:0.78rem; background:rgba(255,255,255,0.06); border:1px solid var(--glass-border); border-radius:6px; color:white;" onchange="updateRememberField('${name}', 'note', this.value)" />
+          <input type="text" placeholder="Add 2028 notes or travel plan..." value="${data.note || ''}" style="width:100%; margin-top:8px; padding:8px 12px; font-size:0.8rem; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); border-radius:8px; color:white;" onchange="updateRememberField('${name}', 'note', this.value)" />
         </div>
       `;
     }
@@ -934,9 +1009,7 @@
     // --- GPSROUTER V3 ADVANCED ALGORITHMIC MODELING ---
     function guessCountryAndRegion(name) {
       const lower = name.toLowerCase();
-      // International heuristics
       if (/(london|paris|tokyo|new york|berlin|singapore|sydney|zurich|seoul|dubai|hong kong|amsterdam|reykjavik|dublin|rome|vienna|stockholm|oslo|copenhagen|auckland|são paulo|mexico city|cape town|mumbai|bangkok|madrid|barcelona|beijing|shanghai)/i.test(lower)) {
-        // match global if known, otherwise determine
         const found = DATABASE.find(c => c.name.toLowerCase() === lower);
         if (found) return { country: found.country, province: found.province };
       }
@@ -945,7 +1018,6 @@
       if (/(paris|france|lyon|marseille)/i.test(lower)) return { country: "France", province: "Île-de-France" };
       if (/(berlin|germany|munich|frankfurt)/i.test(lower)) return { country: "Germany", province: "Bavaria" };
       
-      // Default fallback to Canada with intelligent province guess
       if (/(vancouver|victoria|kelowna|nanaimo|kamloops|whistler|tofino)/i.test(lower)) return { country: "Canada", province: "British Columbia" };
       if (/(calgary|edmonton|banff|canmore|red deer|lethbridge)/i.test(lower)) return { country: "Canada", province: "Alberta" };
       if (/(montreal|quebec|laval|sherbrooke|tremblant)/i.test(lower)) return { country: "Canada", province: "Quebec" };
@@ -1013,7 +1085,7 @@
       const raw = document.getElementById("gpsInput").value.trim();
       const resultEl = document.getElementById("gpsResult");
       if (!raw) {
-        resultEl.innerHTML = `<p style="color:var(--red);margin-top:10px;">Please enter a city or location name.</p>`;
+        resultEl.innerHTML = `<p style="color:#F87171;margin-top:10px;">Please enter a city or location name.</p>`;
         return;
       }
       resultEl.innerHTML = `<div class="loading"><div class="spinner"></div>GPSRouter v3 executing 2028 econometric models for ${raw}…</div>`;

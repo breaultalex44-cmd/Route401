@@ -3,36 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Route401 — Global & Canadian Intelligence Matrix</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <title>Route401 — Global & Muskoka-Toronto Intelligence Matrix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      /* Canadian Premium Color Palette */
-      --canadian-red: #D80027;
-      --canadian-red-dark: #A3001C;
-      --canadian-red-glow: rgba(216, 0, 39, 0.35);
-      --maple-gold: #FFB703;
-      --maple-gold-glow: rgba(255, 183, 3, 0.25);
-      --snow-white: #FFFFFF;
-      --ice-blue: #EBF3FA;
+      /* Muskoka Cottage Wood & Lake Palette */
+      --pine-green: #1B3B2B;
+      --pine-green-dark: #0F2319;
+      --pine-green-glow: rgba(27, 59, 43, 0.4);
+      --muskoka-lake: #1C3144;
+      --muskoka-lake-light: #2A475E;
+      --granite-rock: #3E444C;
+      --oak-bark: #8B5E3C;
+      --sunset-amber: #D97706;
+      --sunset-amber-glow: rgba(217, 119, 6, 0.25);
       
-      /* Dark Theme Canadian Shield Backgrounds */
-      --bg-deep: #080A0F;
-      --bg-panel: rgba(18, 22, 32, 0.78);
-      --bg-card: rgba(23, 29, 42, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --glass-border-red: rgba(216, 0, 39, 0.3);
+      /* Toronto Urban Metallic Accents */
+      --cn-silver: #E2E8F0;
+      --bay-street-blue: #2563EB;
+      --toronto-gold: #F59E0B;
+      --urban-concrete: #1E293B;
+      
+      /* Dark Theme Muskoka Shield Backgrounds */
+      --bg-deep: #0B1017;
+      --bg-panel: rgba(18, 26, 36, 0.82);
+      --bg-card: rgba(24, 35, 48, 0.88);
+      --glass-border: rgba(226, 232, 240, 0.12);
+      --glass-border-green: rgba(27, 59, 43, 0.45);
+      --glass-border-amber: rgba(217, 119, 6, 0.35);
       
       /* Text & Accents */
-      --text-main: #F3F6FC;
+      --text-main: #F8FAFC;
       --text-dim: #94A3B8;
       --text-muted: #64748B;
       --green: #10B981;
       --blue: #3B82F6;
       
-      --shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
-      --shadow-red: 0 8px 30px rgba(216, 0, 39, 0.25);
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      --shadow-green: 0 10px 32px rgba(27, 59, 43, 0.35);
+      --shadow-amber: 0 10px 32px rgba(217, 119, 6, 0.25);
       --radius: 16px;
     }
 
@@ -44,12 +54,12 @@
       min-height: 100vh;
       line-height: 1.5;
       -webkit-text-size-adjust: 100%;
-      /* Northern Lights Aurora & Forest Subtle Background */
+      /* Muskoka Pine Forest, Granite Shield & Lake Twilight Gradient */
       background-image: 
-        radial-gradient(circle at 10% 10%, rgba(216, 0, 39, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(255, 183, 3, 0.03) 0%, transparent 60%),
-        linear-gradient(to bottom, rgba(8, 10, 15, 0.95), rgba(8, 10, 15, 0.98));
+        radial-gradient(circle at 15% 15%, rgba(27, 59, 43, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(37, 99, 235, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(217, 119, 6, 0.08) 0%, transparent 65%),
+        linear-gradient(to bottom, rgba(11, 16, 23, 0.94), rgba(11, 16, 23, 0.98));
       background-attachment: fixed;
     }
 
@@ -64,7 +74,7 @@
     /* Desktop Viewport Control Toolbar */
     .desktop-control-bar {
       display: none;
-      background: #04060A;
+      background: #06090E;
       color: var(--text-dim);
       padding: 8px 24px;
       font-size: 0.78rem;
@@ -81,7 +91,7 @@
     }
     .desktop-control-bar input[type="range"] {
       width: 140px;
-      accent-color: var(--canadian-red);
+      accent-color: var(--pine-green);
       cursor: pointer;
     }
     @media (min-width: 768px) {
@@ -90,12 +100,12 @@
 
     /* Header & Navigation */
     header {
-      background: rgba(12, 16, 24, 0.88);
+      background: rgba(15, 23, 34, 0.9);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--glass-border-red);
+      border-bottom: 1px solid var(--glass-border-amber);
       padding: 14px 20px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.5);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -120,48 +130,48 @@
       gap: 14px;
     }
     .logo-icon {
-      width: 44px; height: 44px;
-      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      width: 46px; height: 46px;
+      background: linear-gradient(135deg, var(--pine-green), var(--pine-green-dark));
+      border: 1px solid rgba(245, 158, 11, 0.4);
       border-radius: 12px;
       display: grid;
       place-items: center;
-      font-family: 'Cinzel', serif;
-      font-weight: 800;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 900;
       color: #fff;
-      font-size: 1.05rem;
-      box-shadow: var(--shadow-red);
+      font-size: 1.1rem;
+      box-shadow: var(--shadow-green);
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
     }
     .logo-icon::after {
-      content: '🍁';
+      content: '🌲';
       position: absolute;
-      font-size: 1.4rem;
-      opacity: 0.15;
-      right: -4px;
-      bottom: -6px;
+      font-size: 1.3rem;
+      opacity: 0.2;
+      right: -3px;
+      bottom: -5px;
     }
     .logo h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
       color: #fff;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    .logo h1 span.maple-leaf {
-      color: var(--canadian-red);
-      font-size: 1.2rem;
-      text-shadow: 0 0 10px var(--canadian-red-glow);
+    .logo h1 span.toronto-accent {
+      color: var(--sunset-amber);
+      font-size: 1.1rem;
+      text-shadow: 0 0 10px var(--sunset-amber-glow);
     }
     .logo span.subtag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.68rem;
-      color: var(--maple-gold);
+      color: var(--sunset-amber);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       display: block;
@@ -192,15 +202,15 @@
       gap: 8px;
     }
     nav button:hover {
-      background: rgba(216, 0, 39, 0.15);
-      border-color: rgba(216, 0, 39, 0.4);
+      background: rgba(217, 119, 6, 0.15);
+      border-color: rgba(217, 119, 6, 0.4);
       color: #fff;
     }
     nav button.active {
-      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
+      background: linear-gradient(135deg, var(--pine-green), var(--muskoka-lake));
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: var(--shadow-red);
+      border-color: var(--sunset-amber);
+      box-shadow: var(--shadow-green);
     }
 
     main {
@@ -239,17 +249,17 @@
       .controls input, .controls select { flex: 1; min-width: 170px; }
     }
     .controls input:focus, .controls select:focus {
-      border-color: var(--canadian-red);
-      box-shadow: 0 0 0 3px var(--canadian-red-glow);
-      background: rgba(28, 35, 50, 0.95);
+      border-color: var(--sunset-amber);
+      box-shadow: 0 0 0 3px var(--sunset-amber-glow);
+      background: rgba(30, 44, 60, 0.95);
     }
-    .controls select option { background: #0f1420; color: white; }
+    .controls select option { background: #121A24; color: white; }
 
     .stats-bar {
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
-      border-left: 4px solid var(--canadian-red);
+      border-left: 4px solid var(--sunset-amber);
       border-radius: var(--radius);
       padding: 12px 20px;
       box-shadow: var(--shadow);
@@ -263,9 +273,9 @@
     @media (min-width: 520px) {
       .stats-bar { flex-direction: row; flex-wrap: wrap; gap: 20px; align-items: center; }
     }
-    .stats-bar strong { color: var(--maple-gold); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+    .stats-bar strong { color: var(--sunset-amber); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
 
-    /* Grid Layout & Canadian Cards */
+    /* Grid Layout & Muskoka-Toronto Cards */
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -287,12 +297,12 @@
       position: relative;
     }
     .card:hover {
-      border-color: rgba(216, 0, 39, 0.4);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(216, 0, 39, 0.15);
+      border-color: rgba(217, 119, 6, 0.45);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(217, 119, 6, 0.15);
       transform: translateY(-3px);
     }
     .card-header {
-      background: linear-gradient(135deg, rgba(216, 0, 39, 0.12), rgba(255, 183, 3, 0.05));
+      background: linear-gradient(135deg, rgba(27, 59, 43, 0.35), rgba(37, 99, 235, 0.18));
       border-bottom: 1px solid var(--glass-border);
       padding: 16px 18px;
       display: flex;
@@ -301,15 +311,15 @@
       gap: 12px;
     }
     .card-header h3 {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: #fff;
-      font-family: 'Cinzel', serif;
-      letter-spacing: 0.5px;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      letter-spacing: 0.3px;
     }
     .card-header .prov {
       font-size: 0.78rem;
-      color: var(--maple-gold);
+      color: var(--sunset-amber);
       margin-top: 3px;
       font-weight: 600;
       display: flex;
@@ -330,16 +340,16 @@
       flex-shrink: 0;
     }
     .remember-btn:hover {
-      background: rgba(216, 0, 39, 0.2);
-      border-color: var(--canadian-red);
-      color: var(--canadian-red);
+      background: rgba(217, 119, 6, 0.2);
+      border-color: var(--sunset-amber);
+      color: var(--sunset-amber);
       transform: scale(1.08);
     }
     .remember-btn.remembered {
-      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
+      background: linear-gradient(135deg, var(--pine-green), var(--sunset-amber));
       color: #fff;
       border-color: rgba(255, 255, 255, 0.4);
-      box-shadow: var(--shadow-red);
+      box-shadow: var(--shadow-amber);
       transform: scale(1.05);
     }
 
@@ -360,14 +370,14 @@
     }
     .badge.pop { color: #60A5FA; border-color: rgba(96, 165, 250, 0.2); }
     .badge.den { color: #34D399; border-color: rgba(52, 211, 153, 0.2); }
-    .badge.hdi { color: var(--maple-gold); border-color: rgba(255, 183, 3, 0.2); }
+    .badge.hdi { color: var(--sunset-amber); border-color: rgba(217, 119, 6, 0.2); }
     .badge.crime { color: #F87171; border-color: rgba(248, 113, 113, 0.2); }
     .badge.gdp { color: #C084FC; border-color: rgba(192, 132, 252, 0.2); }
     .badge.global { background: rgba(59, 130, 246, 0.12); color: #93C5FD; border-color: rgba(59, 130, 246, 0.3); }
 
     .detail {
       font-size: 0.88rem;
-      background: rgba(0, 0, 0, 0.15);
+      background: rgba(0, 0, 0, 0.2);
       padding: 10px 12px;
       border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.03);
@@ -377,19 +387,19 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--maple-gold);
+      color: var(--sunset-amber);
       margin-bottom: 3px;
       font-weight: 700;
     }
     .detail p { color: #E2E8F0; line-height: 1.45; }
 
-    /* Customization Box inside Remembered Cards (2028 Focus) */
+    /* Customization Box inside Remembered Cards (2026-2027 Focus) */
     .remember-custom-box {
       margin-top: auto;
       padding: 14px;
-      border-top: 1px solid var(--glass-border-red);
+      border-top: 1px solid var(--glass-border-amber);
       font-size: 0.82rem;
-      background: linear-gradient(to bottom, rgba(216, 0, 39, 0.06), rgba(0, 0, 0, 0.3));
+      background: linear-gradient(to bottom, rgba(27, 59, 43, 0.2), rgba(0, 0, 0, 0.35));
       margin: 8px -18px -16px -18px;
       border-bottom-left-radius: var(--radius);
       border-bottom-right-radius: var(--radius);
@@ -403,7 +413,7 @@
     }
     .custom-row select, .custom-row input[type="date"] {
       padding: 8px 10px;
-      background: rgba(15, 20, 30, 0.9);
+      background: rgba(15, 23, 34, 0.9);
       border: 1px solid var(--glass-border);
       border-radius: 8px;
       font-size: 0.8rem;
@@ -411,11 +421,11 @@
       min-height: 38px;
       outline: none;
     }
-    .custom-row select option { background: #0b1329; color: white; }
+    .custom-row select option { background: #121A24; color: white; }
     .bucket-badge {
-      background: rgba(255, 183, 3, 0.18);
-      color: var(--maple-gold);
-      border: 1px solid rgba(255, 183, 3, 0.4);
+      background: rgba(217, 119, 6, 0.18);
+      color: var(--sunset-amber);
+      border: 1px solid rgba(217, 119, 6, 0.4);
       padding: 3px 8px;
       border-radius: 6px;
       font-size: 0.72rem;
@@ -427,7 +437,7 @@
       background: var(--bg-panel);
       backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
-      border-top: 3px solid var(--canadian-red);
+      border-top: 3px solid var(--pine-green);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 24px;
@@ -435,15 +445,15 @@
       margin: 0 auto 20px;
     }
     .gps-box h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.5rem;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 1.55rem;
       margin-bottom: 6px;
       color: #fff;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .gps-box h2 i { color: var(--canadian-red); }
+    .gps-box h2 i { color: var(--sunset-amber); }
     .gps-box p.sub {
       color: var(--text-dim);
       margin-bottom: 20px;
@@ -461,17 +471,17 @@
       flex: 1;
       width: 100%;
       padding: 14px 18px;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.35);
       border: 1px solid var(--glass-border);
       border-radius: 12px;
       font-size: 16px;
       color: white;
       min-height: 50px;
     }
-    .gps-form input:focus { outline: none; border-color: var(--canadian-red); box-shadow: 0 0 0 3px var(--canadian-red-glow); }
+    .gps-form input:focus { outline: none; border-color: var(--sunset-amber); box-shadow: 0 0 0 3px var(--sunset-amber-glow); }
     
     .btn {
-      background: linear-gradient(135deg, var(--canadian-red), var(--canadian-red-dark));
+      background: linear-gradient(135deg, var(--pine-green), var(--muskoka-lake));
       color: #fff;
       border: 1px solid rgba(255,255,255,0.2);
       padding: 12px 22px;
@@ -486,13 +496,13 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: var(--shadow-red);
+      box-shadow: var(--shadow-green);
     }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(216, 0, 39, 0.4); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(27, 59, 43, 0.5); }
     .btn.secondary { background: linear-gradient(135deg, #2563EB, #1D4ED8); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3); }
     .btn.secondary:hover { box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5); }
-    .btn.outline { background: transparent; border: 1px solid var(--canadian-red); color: #fff; box-shadow: none; }
-    .btn.outline:hover { background: var(--canadian-red); }
+    .btn.outline { background: transparent; border: 1px solid var(--sunset-amber); color: #fff; box-shadow: none; }
+    .btn.outline:hover { background: var(--sunset-amber); color: #000; }
 
     .loading {
       text-align: center;
@@ -502,7 +512,7 @@
     .spinner {
       width: 40px; height: 40px;
       border: 3px solid rgba(255,255,255,0.1);
-      border-top-color: var(--canadian-red);
+      border-top-color: var(--sunset-amber);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
       margin: 0 auto 12px;
@@ -510,8 +520,8 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .disclaimer {
-      background: rgba(255, 183, 3, 0.08);
-      border-left: 4px solid var(--maple-gold);
+      background: rgba(217, 119, 6, 0.1);
+      border-left: 4px solid var(--sunset-amber);
       padding: 12px 16px;
       border-radius: 0 10px 10px 0;
       font-size: 0.82rem;
@@ -519,20 +529,20 @@
       color: #FDE68A;
     }
 
-    /* Thumb Tab (2028 Edition) */
+    /* Thumb Tab (2026-2027 Edition) */
     .thumb-box {
       background: var(--bg-panel);
       backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
-      border-top: 3px solid var(--maple-gold);
+      border-top: 3px solid var(--sunset-amber);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 24px;
       max-width: 100%;
       margin: 0 auto;
     }
-    .thumb-box h2 { font-family: 'Cinzel', serif; color: #fff; margin-bottom: 8px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
-    .thumb-box h2 i { color: var(--maple-gold); }
+    .thumb-box h2 { font-family: 'Cabinet Grotesk', sans-serif; color: #fff; margin-bottom: 8px; font-size: 1.55rem; display: flex; align-items: center; gap: 10px; }
+    .thumb-box h2 i { color: var(--sunset-amber); }
     .thumb-actions {
       display: flex;
       flex-direction: column;
@@ -566,7 +576,7 @@
       padding: 50px 20px;
       color: var(--text-dim);
     }
-    .empty i { font-size: 3rem; color: var(--canadian-red); opacity: 0.6; margin-bottom: 14px; display: block; }
+    .empty i { font-size: 3rem; color: var(--sunset-amber); opacity: 0.6; margin-bottom: 14px; display: block; }
 
     footer {
       text-align: center;
@@ -575,7 +585,7 @@
       color: var(--text-muted);
       border-top: 1px solid var(--glass-border);
       margin-top: 40px;
-      background: rgba(4, 6, 10, 0.8);
+      background: rgba(6, 9, 14, 0.85);
     }
   </style>
 </head>
@@ -586,7 +596,7 @@
     <span>💻 PC / Laptop Viewport Simulator:</span>
     <label>
       <input type="range" id="viewportSlider" min="360" max="1280" value="412" step="4">
-      <span id="sliderValue">412px (Moto G Play Width)</span>
+      <span id="sliderValue">412px (Moto G Play Ratio Sim)</span>
     </label>
     <button onclick="resetViewport()" style="background:#111; border:1px solid #333; color:#fff; padding:3px 10px; border-radius:4px; cursor:pointer; font-size:0.7rem;">Reset Full</button>
   </div>
@@ -597,13 +607,13 @@
         <div class="logo">
           <div class="logo-icon">401</div>
           <div>
-            <h1>Route401 <span class="maple-leaf">🍁</span></h1>
-            <span class="subtag">Global &amp; Canadian Matrix v5.0</span>
+            <h1>Route401 <span class="toronto-accent">🌲</span></h1>
+            <span class="subtag">Muskoka &amp; Toronto Matrix v5.0</span>
           </div>
         </div>
         <nav>
           <button class="active" data-panel="database"><i class="fa-solid fa-earth-americas"></i> Database</button>
-          <button data-panel="remember"><i class="fa-solid fa-map-pin"></i> Saved (2028)</button>
+          <button data-panel="remember"><i class="fa-solid fa-map-pin"></i> Saved (2026-2027)</button>
           <button data-panel="gps"><i class="fa-solid fa-satellite-dish"></i> GPSRouter v3</button>
           <button data-panel="thumb"><i class="fa-solid fa-floppy-disk"></i> Portable Tab</button>
         </nav>
@@ -637,24 +647,24 @@
       <!-- REMEMBER -->
       <section id="remember" class="panel">
         <div class="controls">
-          <input type="search" id="rememberSearch" placeholder="Search remembered places (2028 focus)..." />
+          <input type="search" id="rememberSearch" placeholder="Search remembered places (2026-2027 focus)..." />
           <select id="folderFilter">
             <option value="">All Folders</option>
             <option value="General">General</option>
-            <option value="Bucket List">Bucket List 2028</option>
-            <option value="Travel">Travel 2028</option>
+            <option value="Bucket List">Bucket List 2026-2027</option>
+            <option value="Travel">Travel 2026-2027</option>
             <option value="Business">Business</option>
           </select>
           <select id="rememberSort">
             <option value="name">Sort: Name</option>
-            <option value="reminder">Sort: 2028 Reminder Date</option>
+            <option value="reminder">Sort: 2026-2027 Reminder Date</option>
           </select>
         </div>
         <div class="stats-bar" id="rememberStatsBar"></div>
         <div class="grid" id="rememberGrid"></div>
         <div class="empty" id="rememberEmpty" style="display:none;">
           <i><i class="fa-solid fa-map-location-dot"></i></i>
-          <p>No remembered places yet. Click the 🍁 icon on any city card to save it with 2028 notes and folders.</p>
+          <p>No remembered places yet. Click the 🌲 icon on any city card to save it with 2026-2027 notes and folders.</p>
         </div>
       </section>
 
@@ -662,7 +672,7 @@
       <section id="gps" class="panel">
         <div class="gps-box">
           <h2><i class="fa-solid fa-compass"></i> GPSRouter v3 (Advanced Global Modeling)</h2>
-          <p class="sub">Enter any town, hamlet, or world metropolis — even unlisted. GPSRouter v3 instantly calculates an advanced econometric profile with regional GDP parity, trade indexes, and 2028 socio-economic projections.</p>
+          <p class="sub">Enter any town, hamlet, or world metropolis — even unlisted. GPSRouter v3 instantly calculates an advanced econometric profile with regional GDP parity, trade indexes, and 2026-2027 socio-economic projections.</p>
           <div class="gps-form">
             <input type="text" id="gpsInput" placeholder="e.g. Stratford, Reykjavik, Kyoto, Tofino…" list="citySuggestions" />
             <datalist id="citySuggestions"></datalist>
@@ -672,25 +682,25 @@
         </div>
       </section>
 
-      <!-- PORTABLE THUMB TAB (2028 EDITION) -->
+      <!-- PORTABLE THUMB TAB (2026-2027 EDITION) -->
       <section id="thumb" class="panel">
         <div class="thumb-box">
-          <h2><i class="fa-solid fa-microchip"></i> Portable Thumb Tab (2028 Edition)</h2>
-          <p style="color:var(--text-dim); margin-bottom:0.5rem; font-size: 0.88rem;">Export your remembered 2028 places and custom GPS models as a secure portable JSON thumb file, or import state across devices.</p>
+          <h2><i class="fa-solid fa-microchip"></i> Portable Thumb Tab (2026-2027 Edition)</h2>
+          <p style="color:var(--text-dim); margin-bottom:0.5rem; font-size: 0.88rem;">Export your remembered 2026-2027 places and custom GPS models as a secure portable JSON thumb file, or import state across devices.</p>
           <div class="thumb-actions">
             <button class="btn" id="exportThumb"><i class="fa-solid fa-download"></i> Export (.json)</button>
             <button class="btn secondary" id="importThumbBtn"><i class="fa-solid fa-upload"></i> Import File</button>
             <input type="file" id="importThumbFile" accept=".json,application/json" style="display:none;" />
             <button class="btn outline" id="clearRemembered"><i class="fa-solid fa-trash-can"></i> Clear All</button>
           </div>
-          <div class="thumb-status" id="thumbStatus">Ready. Active 2028 remembered places in memory: <strong id="thumbCount">0</strong></div>
+          <div class="thumb-status" id="thumbStatus">Ready. Active 2026-2027 remembered places in memory: <strong id="thumbCount">0</strong></div>
           <textarea class="thumb-preview" id="thumbPreview" readonly placeholder="Exported JSON data will appear here..."></textarea>
         </div>
       </section>
     </main>
 
     <footer>
-      Route401 v5.0 · The Expansion into the World · 2028 Econometric Projections &amp; Global Census Data
+      Route401 v5.0 · The Expansion into the World · 2026-2027 Econometric Projections &amp; Global Census Data
     </footer>
   </div>
 
@@ -802,9 +812,9 @@
       { name: "Bangkok", province: "Bangkok Metropolis", country: "Thailand", population: 10539000, density: 5300, employers: "CP Group, PTT, Thai Airways, Kasikornbank, tourism sector", industries: "Automotive, Electronics Manufacturing, Tourism, Medical Hub", hdi: 0.82, crime: 41.3, gdpPerCapita: "$17,200", totalGdpNum: 240.0, totalGdp: "$240B", economy: "Southeast Asia's premier tourism, automotive manufacturing, and medical tourism center.", jobMarket: "Automotive engineering, medical tourism services, and hospitality management.", importance: "Economic and cultural capital of Thailand and ASEAN hub." }
     ];
 
-    // LocalStorage State (2028 Edition)
-    let rememberedMap = JSON.parse(localStorage.getItem("route401_remembered_map_2028") || "{}");
-    let customEntries = JSON.parse(localStorage.getItem("route401_custom_2028") || "[]");
+    // LocalStorage State (2026-2027 Edition)
+    let rememberedMap = JSON.parse(localStorage.getItem("route401_remembered_map_2026_2027") || localStorage.getItem("route401_remembered_map_2028") || "{}");
+    let customEntries = JSON.parse(localStorage.getItem("route401_custom_2026_2027") || localStorage.getItem("route401_custom_2028") || "[]");
 
     // Navigation switching
     document.querySelectorAll("nav button").forEach(btn => {
@@ -858,7 +868,7 @@
         <span>Shown: <strong>${list.length}</strong></span>
         <span>Canadian Hubs: <strong>${canadianCount}</strong></span>
         <span>Global Cities: <strong>${globalCount}</strong></span>
-        <span>Saved (2028): <strong>${Object.keys(rememberedMap).length}</strong></span>
+        <span>Saved (2026-2027): <strong>${Object.keys(rememberedMap).length}</strong></span>
       `;
       const grid = document.getElementById("cityGrid");
       grid.innerHTML = list.map(c => cardHTML(c)).join("");
@@ -868,7 +878,7 @@
     function cardHTML(c, extraBadge = "") {
       const isRem = rememberedMap[c.name] !== undefined;
       const isGlobal = c.country && c.country !== "Canada";
-      const flagIcon = isGlobal ? '🌍 ' : '🇨🇦 ';
+      const flagIcon = isGlobal ? '🌍 ' : '🌲 ';
       const locationSub = `${flagIcon}${c.province ? c.province + ', ' : ''}${c.country}`;
       
       return `
@@ -878,7 +888,7 @@
               <h3>${c.name}</h3>
               <div class="prov">${locationSub}${extraBadge}</div>
             </div>
-            <button class="remember-btn ${isRem ? "remembered" : ""}" title="Remember for 2028" data-name="${c.name}">🍁</button>
+            <button class="remember-btn ${isRem ? "remembered" : ""}" title="Remember for 2026-2027" data-name="${c.name}">🌲</button>
           </div>
           <div class="card-body">
             <div class="meta-row">
@@ -891,7 +901,7 @@
             </div>
             <div class="detail"><strong>Key Employers</strong><p>${c.employers || 'Regional workforce'}</p></div>
             <div class="detail"><strong>Industries</strong><p>${c.industries || 'Diverse commercial sectors'}</p></div>
-            <div class="detail"><strong>Economy (2028 Outlook)</strong><p>${c.economy || 'Stable 2028 forecast projections.'}</p></div>
+            <div class="detail"><strong>Economy (2026-2027 Outlook)</strong><p>${c.economy || 'Stable 2026-2027 forecast projections.'}</p></div>
             <div class="detail"><strong>Job Market</strong><p>${c.jobMarket || 'Active regional demand.'}</p></div>
             <div class="detail"><strong>Strategic Importance</strong><p>${c.importance || 'Key regional node.'}</p></div>
             ${isRem ? renderCustomBox(c.name) : ""}
@@ -901,26 +911,26 @@
     }
 
     function renderCustomBox(name) {
-      const data = rememberedMap[name] || { folder: "General", reminder: "2028-12-31", bucketList: false, note: "" };
+      const data = rememberedMap[name] || { folder: "General", reminder: "2027-12-31", bucketList: false, note: "" };
       return `
         <div class="remember-custom-box" onclick="event.stopPropagation()">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <span style="font-weight:700; font-size:0.75rem; color:var(--maple-gold); font-family:'JetBrains Mono',monospace;">🍁 Saved for 2028 (${data.folder})</span>
-            ${data.bucketList ? '<span class="bucket-badge">2028 Bucket List</span>' : ''}
+            <span style="font-weight:700; font-size:0.75rem; color:var(--sunset-amber); font-family:'JetBrains Mono',monospace;">🌲 Saved for 2026-2027 (${data.folder})</span>
+            ${data.bucketList ? '<span class="bucket-badge">2026-2027 Bucket List</span>' : ''}
           </div>
           <div class="custom-row">
             <select onchange="updateRememberField('${name}', 'folder', this.value)">
               <option value="General" ${data.folder==="General"?"selected":""}>General</option>
-              <option value="Bucket List" ${data.folder==="Bucket List"?"selected":""}>Bucket List 2028</option>
-              <option value="Travel" ${data.folder==="Travel"?"selected":""}>Travel 2028</option>
+              <option value="Bucket List" ${data.folder==="Bucket List"?"selected":""}>Bucket List 2026-2027</option>
+              <option value="Travel" ${data.folder==="Travel"?"selected":""}>Travel 2026-2027</option>
               <option value="Business" ${data.folder==="Business"?"selected":""}>Business</option>
             </select>
-            <input type="date" value="${data.reminder || '2028-06-01'}" onchange="updateRememberField('${name}', 'reminder', this.value)" />
+            <input type="date" value="${data.reminder || '2027-06-01'}" onchange="updateRememberField('${name}', 'reminder', this.value)" />
             <label style="font-size:0.75rem; display:flex; align-items:center; gap:4px; cursor:pointer; color:var(--text-main);">
               <input type="checkbox" ${data.bucketList?"checked":""} onchange="updateRememberField('${name}', 'bucketList', this.checked)" /> List
             </label>
           </div>
-          <input type="text" placeholder="Add 2028 notes or travel plan..." value="${data.note || ''}" style="width:100%; margin-top:8px; padding:8px 12px; font-size:0.8rem; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); border-radius:8px; color:white;" onchange="updateRememberField('${name}', 'note', this.value)" />
+          <input type="text" placeholder="Add 2026-2027 notes or travel plan..." value="${data.note || ''}" style="width:100%; margin-top:8px; padding:8px 12px; font-size:0.8rem; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); border-radius:8px; color:white;" onchange="updateRememberField('${name}', 'note', this.value)" />
         </div>
       `;
     }
@@ -941,15 +951,15 @@
       if (rememberedMap[name]) {
         delete rememberedMap[name];
       } else {
-        rememberedMap[name] = { folder: "General", reminder: "2028-12-31", bucketList: false, note: "" };
+        rememberedMap[name] = { folder: "General", reminder: "2027-12-31", bucketList: false, note: "" };
       }
-      localStorage.setItem("route401_remembered_map_2028", JSON.stringify(rememberedMap));
+      localStorage.setItem("route401_remembered_map_2026_2027", JSON.stringify(rememberedMap));
     }
 
     function updateRememberField(name, field, val) {
       if (!rememberedMap[name]) return;
       rememberedMap[name][field] = val;
-      localStorage.setItem("route401_remembered_map_2028", JSON.stringify(rememberedMap));
+      localStorage.setItem("route401_remembered_map_2026_2027", JSON.stringify(rememberedMap));
       if (document.getElementById("remember").classList.contains("active")) renderRememberPanel();
       updateThumbUI();
     }
@@ -989,7 +999,7 @@
 
       document.getElementById("rememberStatsBar").innerHTML = `
         <span>Shown: <strong>${list.length}</strong></span>
-        <span>Saved for 2028: <strong>${rememberedNames.length}</strong></span>
+        <span>Saved for 2026-2027: <strong>${rememberedNames.length}</strong></span>
       `;
 
       if (list.length === 0) {
@@ -1064,7 +1074,7 @@
         gdpPerCapita,
         totalGdpNum,
         totalGdp,
-        economy: `GPSRouter v3 2028 Model: Proactive economic growth projected for ${name}, ${loc.country} with robust trade integration.`,
+        economy: `GPSRouter v3 2026-2027 Model: Proactive economic growth projected for ${name}, ${loc.country} with robust trade integration.`,
         jobMarket: "Expanding employment opportunities across tech, service sectors, and regional logistics.",
         importance: `Strategically modeled node within the ${loc.country} economic corridor.`,
         _custom: true,
@@ -1072,7 +1082,7 @@
       };
 
       customEntries.push(profile);
-      localStorage.setItem("route401_custom_2028", JSON.stringify(customEntries));
+      localStorage.setItem("route401_custom_2026_2027", JSON.stringify(customEntries));
       return profile;
     }
 
@@ -1088,7 +1098,7 @@
         resultEl.innerHTML = `<p style="color:#F87171;margin-top:10px;">Please enter a city or location name.</p>`;
         return;
       }
-      resultEl.innerHTML = `<div class="loading"><div class="spinner"></div>GPSRouter v3 executing 2028 econometric models for ${raw}…</div>`;
+      resultEl.innerHTML = `<div class="loading"><div class="spinner"></div>GPSRouter v3 executing 2026-2027 econometric models for ${raw}…</div>`;
 
       setTimeout(() => {
         const profile = generateAdvancedProfile(raw);
@@ -1096,7 +1106,7 @@
         resultEl.innerHTML = `
           <div style="margin-top:16px;">
             ${cardHTML(profile, badge)}
-            ${profile._generated ? `<div class="disclaimer"><strong>GPSRouter v3 Note:</strong> Unlisted global location. Econometric statistics synthesized via 2028 multi-tier predictive simulation matrices.</div>` : ""}
+            ${profile._generated ? `<div class="disclaimer"><strong>GPSRouter v3 Note:</strong> Unlisted global location. Econometric statistics synthesized via 2026-2027 multi-tier predictive simulation matrices.</div>` : ""}
           </div>
         `;
         attachRememberHandlers(resultEl);
@@ -1104,15 +1114,15 @@
       }, 500);
     }
 
-    // --- THUMB TAB (2028 EDITION) ---
+    // --- THUMB TAB (2026-2027 EDITION) ---
     function updateThumbUI() {
       const count = Object.keys(rememberedMap).length;
       document.getElementById("thumbCount").textContent = count;
       const payload = {
         version: 5.0,
-        targetYear: 2028,
+        targetYear: "2026-2027",
         exported: new Date().toISOString(),
-        app: "Route401 Portable Thumb Tab (2028 Edition)",
+        app: "Route401 Portable Thumb Tab (2026-2027 Edition)",
         rememberedMap,
         customEntries
       };
@@ -1120,14 +1130,14 @@
     }
 
     document.getElementById("exportThumb").addEventListener("click", () => {
-      const payload = { version: 5.0, targetYear: 2028, exported: new Date().toISOString(), rememberedMap, customEntries };
+      const payload = { version: 5.0, targetYear: "2026-2027", exported: new Date().toISOString(), rememberedMap, customEntries };
       const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `Route401_2028_ThumbTab_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `Route401_2026_2027_ThumbTab_${new Date().toISOString().slice(0,10)}.json`;
       a.click();
       URL.revokeObjectURL(a.href);
-      document.getElementById("thumbStatus").innerHTML = `Successfully exported <strong>${Object.keys(rememberedMap).length}</strong> 2028 places.`;
+      document.getElementById("thumbStatus").innerHTML = `Successfully exported <strong>${Object.keys(rememberedMap).length}</strong> 2026-2027 places.`;
     });
 
     document.getElementById("importThumbBtn").addEventListener("click", () => {
@@ -1147,11 +1157,11 @@
             throw new Error("Invalid format");
           }
           customEntries = Array.isArray(data.customEntries) ? data.customEntries : [];
-          localStorage.setItem("route401_remembered_map_2028", JSON.stringify(rememberedMap));
-          localStorage.setItem("route401_custom_2028", JSON.stringify(customEntries));
+          localStorage.setItem("route401_remembered_map_2026_2027", JSON.stringify(rememberedMap));
+          localStorage.setItem("route401_custom_2026_2027", JSON.stringify(customEntries));
           updateThumbUI();
           renderGrid();
-          document.getElementById("thumbStatus").innerHTML = `Thumb Tab 2028 import successful!`;
+          document.getElementById("thumbStatus").innerHTML = `Thumb Tab 2026-2027 import successful!`;
         } catch (err) {
           document.getElementById("thumbStatus").textContent = "Import failed: " + err.message;
         }
@@ -1161,13 +1171,13 @@
     });
 
     document.getElementById("clearRemembered").addEventListener("click", () => {
-      if (confirm("Clear all remembered 2028 places?")) {
+      if (confirm("Clear all remembered 2026-2027 places?")) {
         rememberedMap = {};
-        localStorage.setItem("route401_remembered_map_2028", "{}");
+        localStorage.setItem("route401_remembered_map_2026_2027", "{}");
         updateThumbUI();
         renderGrid();
         if (document.getElementById("remember").classList.contains("active")) renderRememberPanel();
-        document.getElementById("thumbStatus").textContent = "Cleared all 2028 records.";
+        document.getElementById("thumbStatus").textContent = "Cleared all 2026-2027 records.";
       }
     });
 
